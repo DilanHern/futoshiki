@@ -1,5 +1,5 @@
 package futoshiki;
-import Vista.Jugar;
+import Vista.*;
 
 public class Futoshiki {
 
@@ -8,7 +8,7 @@ public class Futoshiki {
      */
     public static void main(String[] args) {
        
-        Jugar jugar = new Jugar();
+        MenuPrincipal jugar = new MenuPrincipal();
         jugar.setVisible(true);
         
     }
