@@ -1,13 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Vista;
 
-/**
- *
- * @author carol_flgngfy
- */
+
 public class MenuPrincipal extends javax.swing.JFrame {
 
     /**
@@ -29,9 +22,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        botonRedondo9 = new Componentes.BotonRedondo();
-        botonRedondo10 = new Componentes.BotonRedondo();
-        btnJugar4 = new Componentes.BotonRedondo();
+        btnConfiguracion = new Componentes.BotonRedondo();
+        btnSalir = new Componentes.BotonRedondo();
+        btnJugar = new Componentes.BotonRedondo();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 153, 51));
@@ -44,30 +37,30 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(204, 102, 0));
         jLabel5.setText("FUTOSHIKI");
 
-        botonRedondo9.setBackground(new java.awt.Color(204, 204, 0));
-        botonRedondo9.setText("Configuracion");
-        botonRedondo9.setColor1(new java.awt.Color(204, 204, 0));
-        botonRedondo9.setColor2(new java.awt.Color(204, 204, 0));
-        botonRedondo9.setColor3(new java.awt.Color(204, 204, 0));
-        botonRedondo9.addActionListener(new java.awt.event.ActionListener() {
+        btnConfiguracion.setBackground(new java.awt.Color(204, 204, 0));
+        btnConfiguracion.setText("Configuracion");
+        btnConfiguracion.setColor1(new java.awt.Color(204, 204, 0));
+        btnConfiguracion.setColor2(new java.awt.Color(204, 204, 0));
+        btnConfiguracion.setColor3(new java.awt.Color(204, 204, 0));
+        btnConfiguracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonRedondo9ActionPerformed(evt);
+                btnConfiguracionActionPerformed(evt);
             }
         });
 
-        botonRedondo10.setBackground(new java.awt.Color(153, 51, 255));
-        botonRedondo10.setText("Salir");
-        botonRedondo10.setToolTipText("");
-        botonRedondo10.setColor1(new java.awt.Color(153, 51, 255));
-        botonRedondo10.setColor2(new java.awt.Color(153, 51, 255));
-        botonRedondo10.setColor3(new java.awt.Color(153, 51, 255));
+        btnSalir.setBackground(new java.awt.Color(153, 51, 255));
+        btnSalir.setText("Salir");
+        btnSalir.setToolTipText("");
+        btnSalir.setColor1(new java.awt.Color(153, 51, 255));
+        btnSalir.setColor2(new java.awt.Color(153, 51, 255));
+        btnSalir.setColor3(new java.awt.Color(153, 51, 255));
 
-        btnJugar4.setBackground(new java.awt.Color(255, 153, 0));
-        btnJugar4.setText("Jugar");
-        btnJugar4.setColor1(new java.awt.Color(255, 153, 0));
-        btnJugar4.setColor2(new java.awt.Color(255, 153, 0));
-        btnJugar4.setColor3(new java.awt.Color(255, 153, 0));
-        btnJugar4.addActionListener(new java.awt.event.ActionListener() {
+        btnJugar.setBackground(new java.awt.Color(255, 153, 0));
+        btnJugar.setText("Jugar");
+        btnJugar.setColor1(new java.awt.Color(255, 153, 0));
+        btnJugar.setColor2(new java.awt.Color(255, 153, 0));
+        btnJugar.setColor3(new java.awt.Color(255, 153, 0));
+        btnJugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnJugarActionPerformed(evt);
             }
@@ -85,9 +78,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addGap(94, 94, 94))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(botonRedondo9, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnJugar4, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonRedondo10, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(163, 163, 163))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -96,11 +89,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGap(43, 43, 43)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnJugar4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(botonRedondo9, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnConfiguracion, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(botonRedondo10, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(56, Short.MAX_VALUE))
         );
 
@@ -139,9 +132,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnJugarActionPerformed
 
-    private void botonRedondo9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRedondo9ActionPerformed
+    private void btnConfiguracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfiguracionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_botonRedondo9ActionPerformed
+    }//GEN-LAST:event_btnConfiguracionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,31 +172,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Componentes.BotonRedondo botonRedondo1;
-    private Componentes.BotonRedondo botonRedondo10;
-    private Componentes.BotonRedondo botonRedondo2;
-    private Componentes.BotonRedondo botonRedondo3;
-    private Componentes.BotonRedondo botonRedondo4;
-    private Componentes.BotonRedondo botonRedondo5;
-    private Componentes.BotonRedondo botonRedondo6;
-    private Componentes.BotonRedondo botonRedondo7;
-    private Componentes.BotonRedondo botonRedondo8;
-    private Componentes.BotonRedondo botonRedondo9;
-    private Componentes.BotonRedondo btnJugar;
-    private Componentes.BotonRedondo btnJugar1;
-    private Componentes.BotonRedondo btnJugar2;
-    private Componentes.BotonRedondo btnJugar3;
-    private Componentes.BotonRedondo btnJugar4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    public Componentes.BotonRedondo btnConfiguracion;
+    public Componentes.BotonRedondo btnJugar;
+    public Componentes.BotonRedondo btnSalir;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     // End of variables declaration//GEN-END:variables
 }

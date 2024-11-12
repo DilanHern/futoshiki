@@ -1,6 +1,6 @@
 package futoshiki;
 import Vista.*;
-
+import Controlador.*;
 public class Futoshiki {
 
     /**
@@ -8,8 +8,9 @@ public class Futoshiki {
      */
     public static void main(String[] args) {
        
-        MenuPrincipal jugar = new MenuPrincipal();
-        jugar.setVisible(true);
+        MenuPrincipal vistaMenu = new MenuPrincipal();
+        ControladorMenu menu = new ControladorMenu(vistaMenu);
+        vistaMenu.setVisible(true);
         
     }
     
