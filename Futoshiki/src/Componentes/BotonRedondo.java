@@ -50,18 +50,18 @@ public class BotonRedondo extends JButton{
 
          Paint oldPaint = g2.getPaint();
         if (m.isArmed()){
-           c2=color1.darker();
-           c1=color2.darker();
-           c3=color3;
+           c2=getColor1().darker();
+           c1=getColor2().darker();
+           c3=getColor3();
         }else{
-           c1=color1.darker();
-           c2=color2.darker();
-           c3=color3.brighter();
+           c1=getColor1().darker();
+           c2=getColor2().darker();
+           c3=getColor3().brighter();
         }
         if (!m.isEnabled()){
-           c2=color1.brighter();
-           c1=color2.brighter();
-           c3=color3.darker();
+           c2=getColor1().brighter();
+           c1=getColor2().brighter();
+           c3=getColor3().darker();
         }
           RoundRectangle2D.Float r2d = new RoundRectangle2D.Float(
                     0,0,getWidth(),getHeight()-1,48, 48);
@@ -79,29 +79,49 @@ public class BotonRedondo extends JButton{
         super.paintComponent(g);
     }
 
+    /**
+     * @return the color1
+     */
     public Color getColor1() {
         return color1;
     }
 
+    /**
+     * @param color1 the color1 to set
+     */
     public void setColor1(Color color1) {
         this.color1 = color1;
     }
 
+    /**
+     * @return the color2
+     */
     public Color getColor2() {
         return color2;
     }
 
+    /**
+     * @param color2 the color2 to set
+     */
     public void setColor2(Color color2) {
         this.color2 = color2;
     }
 
+    /**
+     * @return the color3
+     */
     public Color getColor3() {
         return color3;
     }
 
+    /**
+     * @param color3 the color3 to set
+     */
     public void setColor3(Color color3) {
         this.color3 = color3;
     }
+
+
 
 
 }

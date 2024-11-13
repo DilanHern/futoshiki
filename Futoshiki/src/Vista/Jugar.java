@@ -1,13 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Vista;
 
-/**
- *
- * @author carol_flgngfy
- */
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UnsupportedLookAndFeelException;
+
+
 public class Jugar extends javax.swing.JFrame {
 
     /**
@@ -15,12 +12,7 @@ public class Jugar extends javax.swing.JFrame {
      */
     public Jugar() {
         initComponents();
-         tbtCuadriculas.setUI(new javax.swing.plaf.basic.BasicTabbedPaneUI() {
-            @Override
-            protected int calculateTabAreaHeight(int tabPlacement, int runCount, int maxTabHeight) {
-                return 0; // Hacer la altura de las pestañas cero para ocultarlas
-            }
-         });
+        panelBotones.setVisible(false);
     }
 
     /**
@@ -39,30 +31,12 @@ public class Jugar extends javax.swing.JFrame {
         jDesktopPane3 = new javax.swing.JDesktopPane();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtNombreJugador = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        tbtCuadriculas = new javax.swing.JTabbedPane();
-        panel3x3 = new javax.swing.JPanel();
-        panel4x4 = new javax.swing.JPanel();
-        panel4x5 = new javax.swing.JPanel();
-        panel4x6 = new javax.swing.JPanel();
-        panel4x7 = new javax.swing.JPanel();
-        panel4x8 = new javax.swing.JPanel();
-        panel4x9 = new javax.swing.JPanel();
-        panel4x10 = new javax.swing.JPanel();
+        lblNombreJugador = new javax.swing.JLabel();
         pnlDigitosIzq = new javax.swing.JPanel();
-        botonRedondo2 = new Componentes.BotonRedondo();
         pnlDigitosDer = new javax.swing.JPanel();
-        botonRedondo3 = new Componentes.BotonRedondo();
-        btnBorrarJugada = new Componentes.BotonRedondo();
-        btnRehacerJugada = new Componentes.BotonRedondo();
-        btnBorrarJuego = new Componentes.BotonRedondo();
-        btnTerminarJuego = new Componentes.BotonRedondo();
-        btnGuardarJuego = new Componentes.BotonRedondo();
-        btnCargarJuego = new Componentes.BotonRedondo();
-        btnJugar = new Componentes.BotonRedondo();
         panelTiempo = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -70,6 +44,17 @@ public class Jugar extends javax.swing.JFrame {
         txtHoras = new javax.swing.JLabel();
         txtMinutos = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        lblNivel = new javax.swing.JLabel();
+        PanelCuadriculas = new javax.swing.JPanel();
+        PanelInterno = new javax.swing.JPanel();
+        panelBotones = new javax.swing.JPanel();
+        btnBorrarJugada = new Componentes.BotonRedondo();
+        btnBorrarJuego = new Componentes.BotonRedondo();
+        btnRehacerJugada = new Componentes.BotonRedondo();
+        btnCargarJuego = new Componentes.BotonRedondo();
+        btnGuardarJuego = new Componentes.BotonRedondo();
+        btnJugar = new Componentes.BotonRedondo();
+        btnTerminarJuego = new Componentes.BotonRedondo();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -126,244 +111,58 @@ public class Jugar extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(220, 220, 220));
 
         jLabel1.setFont(new java.awt.Font("Cascadia Mono", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("FUTOSHIKI");
 
-        txtNombreJugador.setForeground(new java.awt.Color(255, 255, 255));
-        txtNombreJugador.setToolTipText("");
+        lblNombreJugador.setFont(new java.awt.Font("Cascadia Mono", 0, 18)); // NOI18N
+        lblNombreJugador.setForeground(new java.awt.Color(0, 0, 0));
+        lblNombreJugador.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblNombreJugador.setText("Jugador");
 
-        jLabel2.setFont(new java.awt.Font("Cascadia Mono", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Nombre del jugador");
-
-        panel3x3.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout panel3x3Layout = new javax.swing.GroupLayout(panel3x3);
-        panel3x3.setLayout(panel3x3Layout);
-        panel3x3Layout.setHorizontalGroup(
-            panel3x3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 412, Short.MAX_VALUE)
-        );
-        panel3x3Layout.setVerticalGroup(
-            panel3x3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 404, Short.MAX_VALUE)
-        );
-
-        tbtCuadriculas.addTab("3x3", panel3x3);
-
-        panel4x4.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout panel4x4Layout = new javax.swing.GroupLayout(panel4x4);
-        panel4x4.setLayout(panel4x4Layout);
-        panel4x4Layout.setHorizontalGroup(
-            panel4x4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 412, Short.MAX_VALUE)
-        );
-        panel4x4Layout.setVerticalGroup(
-            panel4x4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 404, Short.MAX_VALUE)
-        );
-
-        tbtCuadriculas.addTab("4x4", panel4x4);
-
-        panel4x5.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout panel4x5Layout = new javax.swing.GroupLayout(panel4x5);
-        panel4x5.setLayout(panel4x5Layout);
-        panel4x5Layout.setHorizontalGroup(
-            panel4x5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 412, Short.MAX_VALUE)
-        );
-        panel4x5Layout.setVerticalGroup(
-            panel4x5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 404, Short.MAX_VALUE)
-        );
-
-        tbtCuadriculas.addTab("5x5", panel4x5);
-
-        panel4x6.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout panel4x6Layout = new javax.swing.GroupLayout(panel4x6);
-        panel4x6.setLayout(panel4x6Layout);
-        panel4x6Layout.setHorizontalGroup(
-            panel4x6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 412, Short.MAX_VALUE)
-        );
-        panel4x6Layout.setVerticalGroup(
-            panel4x6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 404, Short.MAX_VALUE)
-        );
-
-        tbtCuadriculas.addTab("6x6", panel4x6);
-
-        panel4x7.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout panel4x7Layout = new javax.swing.GroupLayout(panel4x7);
-        panel4x7.setLayout(panel4x7Layout);
-        panel4x7Layout.setHorizontalGroup(
-            panel4x7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 412, Short.MAX_VALUE)
-        );
-        panel4x7Layout.setVerticalGroup(
-            panel4x7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 404, Short.MAX_VALUE)
-        );
-
-        tbtCuadriculas.addTab("7x7", panel4x7);
-
-        panel4x8.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout panel4x8Layout = new javax.swing.GroupLayout(panel4x8);
-        panel4x8.setLayout(panel4x8Layout);
-        panel4x8Layout.setHorizontalGroup(
-            panel4x8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 412, Short.MAX_VALUE)
-        );
-        panel4x8Layout.setVerticalGroup(
-            panel4x8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 404, Short.MAX_VALUE)
-        );
-
-        tbtCuadriculas.addTab("8x8", panel4x8);
-
-        panel4x9.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout panel4x9Layout = new javax.swing.GroupLayout(panel4x9);
-        panel4x9.setLayout(panel4x9Layout);
-        panel4x9Layout.setHorizontalGroup(
-            panel4x9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 412, Short.MAX_VALUE)
-        );
-        panel4x9Layout.setVerticalGroup(
-            panel4x9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 404, Short.MAX_VALUE)
-        );
-
-        tbtCuadriculas.addTab("9x9", panel4x9);
-
-        panel4x10.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout panel4x10Layout = new javax.swing.GroupLayout(panel4x10);
-        panel4x10.setLayout(panel4x10Layout);
-        panel4x10Layout.setHorizontalGroup(
-            panel4x10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 412, Short.MAX_VALUE)
-        );
-        panel4x10Layout.setVerticalGroup(
-            panel4x10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 404, Short.MAX_VALUE)
-        );
-
-        tbtCuadriculas.addTab("10x10", panel4x10);
-
-        pnlDigitosIzq.setBackground(new java.awt.Color(0, 51, 51));
-
-        botonRedondo2.setBackground(new java.awt.Color(255, 255, 255));
-        botonRedondo2.setBorder(null);
-        botonRedondo2.setForeground(new java.awt.Color(0, 0, 0));
-        botonRedondo2.setText("1");
-        botonRedondo2.setColor1(new java.awt.Color(255, 255, 255));
-        botonRedondo2.setColor2(new java.awt.Color(255, 255, 255));
-        botonRedondo2.setColor3(new java.awt.Color(255, 255, 255));
+        pnlDigitosIzq.setBackground(new java.awt.Color(220, 220, 220));
 
         javax.swing.GroupLayout pnlDigitosIzqLayout = new javax.swing.GroupLayout(pnlDigitosIzq);
         pnlDigitosIzq.setLayout(pnlDigitosIzqLayout);
         pnlDigitosIzqLayout.setHorizontalGroup(
             pnlDigitosIzqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDigitosIzqLayout.createSequentialGroup()
-                .addContainerGap(11, Short.MAX_VALUE)
-                .addComponent(botonRedondo2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGap(0, 50, Short.MAX_VALUE)
         );
         pnlDigitosIzqLayout.setVerticalGroup(
             pnlDigitosIzqLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDigitosIzqLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(botonRedondo2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(347, Short.MAX_VALUE))
+            .addGap(0, 135, Short.MAX_VALUE)
         );
 
-        pnlDigitosDer.setBackground(new java.awt.Color(0, 51, 51));
-
-        botonRedondo3.setBackground(new java.awt.Color(255, 255, 255));
-        botonRedondo3.setBorder(null);
-        botonRedondo3.setForeground(new java.awt.Color(0, 0, 0));
-        botonRedondo3.setText("1");
-        botonRedondo3.setColor1(new java.awt.Color(255, 255, 255));
-        botonRedondo3.setColor2(new java.awt.Color(255, 255, 255));
-        botonRedondo3.setColor3(new java.awt.Color(255, 255, 255));
+        pnlDigitosDer.setBackground(new java.awt.Color(220, 220, 220));
 
         javax.swing.GroupLayout pnlDigitosDerLayout = new javax.swing.GroupLayout(pnlDigitosDer);
         pnlDigitosDer.setLayout(pnlDigitosDerLayout);
         pnlDigitosDerLayout.setHorizontalGroup(
             pnlDigitosDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDigitosDerLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(botonRedondo3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 56, Short.MAX_VALUE)
         );
         pnlDigitosDerLayout.setVerticalGroup(
             pnlDigitosDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlDigitosDerLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(botonRedondo3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(347, Short.MAX_VALUE))
+            .addGap(0, 133, Short.MAX_VALUE)
         );
 
-        btnBorrarJugada.setBackground(new java.awt.Color(204, 204, 0));
-        btnBorrarJugada.setText("Borrar Jugada");
-        btnBorrarJugada.setColor1(new java.awt.Color(204, 204, 0));
-        btnBorrarJugada.setColor2(new java.awt.Color(204, 204, 0));
-        btnBorrarJugada.setColor3(new java.awt.Color(204, 204, 0));
-
-        btnRehacerJugada.setBackground(new java.awt.Color(153, 51, 255));
-        btnRehacerJugada.setText("Rehacer Jugada");
-        btnRehacerJugada.setToolTipText("");
-        btnRehacerJugada.setColor1(new java.awt.Color(153, 51, 255));
-        btnRehacerJugada.setColor2(new java.awt.Color(153, 51, 255));
-        btnRehacerJugada.setColor3(new java.awt.Color(153, 51, 255));
-
-        btnBorrarJuego.setBackground(new java.awt.Color(102, 102, 255));
-        btnBorrarJuego.setText("Borrar Juego");
-        btnBorrarJuego.setColor1(new java.awt.Color(102, 102, 255));
-        btnBorrarJuego.setColor2(new java.awt.Color(102, 102, 255));
-        btnBorrarJuego.setColor3(new java.awt.Color(102, 102, 255));
-
-        btnTerminarJuego.setBackground(new java.awt.Color(0, 51, 102));
-        btnTerminarJuego.setText("Terminar Juego");
-        btnTerminarJuego.setColor1(new java.awt.Color(0, 51, 102));
-        btnTerminarJuego.setColor2(new java.awt.Color(0, 51, 102));
-        btnTerminarJuego.setColor3(new java.awt.Color(0, 51, 102));
-
-        btnGuardarJuego.setBackground(new java.awt.Color(255, 102, 102));
-        btnGuardarJuego.setText("Guardar Juego");
-        btnGuardarJuego.setColor1(new java.awt.Color(255, 102, 102));
-        btnGuardarJuego.setColor2(new java.awt.Color(255, 102, 102));
-        btnGuardarJuego.setColor3(new java.awt.Color(255, 102, 102));
-
-        btnCargarJuego.setBackground(new java.awt.Color(51, 204, 255));
-        btnCargarJuego.setText("Cargar Juego");
-        btnCargarJuego.setColor1(new java.awt.Color(51, 204, 255));
-        btnCargarJuego.setColor2(new java.awt.Color(51, 204, 255));
-        btnCargarJuego.setColor3(new java.awt.Color(51, 204, 255));
-
-        btnJugar.setBackground(new java.awt.Color(255, 153, 0));
-        btnJugar.setText("Jugar");
-        btnJugar.setColor1(new java.awt.Color(255, 153, 0));
-        btnJugar.setColor2(new java.awt.Color(255, 153, 0));
-        btnJugar.setColor3(new java.awt.Color(255, 153, 0));
-        btnJugar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnJugarActionPerformed(evt);
-            }
-        });
-
         panelTiempo.setBackground(new java.awt.Color(255, 255, 255));
+        panelTiempo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
@@ -400,15 +199,15 @@ public class Jugar extends javax.swing.JFrame {
                 .addGroup(panelTiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(txtHoras))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelTiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(txtMinutos))
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
                 .addGroup(panelTiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel5))
-                .addGap(17, 17, 17))
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel8))
+                .addGap(32, 32, 32))
         );
         panelTiempoLayout.setVerticalGroup(
             panelTiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -418,99 +217,242 @@ public class Jugar extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelTiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtHoras)
-                    .addComponent(txtMinutos)
-                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelTiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelTiempoLayout.createSequentialGroup()
+                        .addGroup(panelTiempoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtHoras)
+                            .addComponent(txtMinutos))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        lblNivel.setFont(new java.awt.Font("Cascadia Mono", 0, 18)); // NOI18N
+        lblNivel.setForeground(new java.awt.Color(0, 0, 0));
+        lblNivel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblNivel.setText("Nivel");
+
+        PanelCuadriculas.setBackground(new java.awt.Color(255, 255, 255));
+        PanelCuadriculas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout PanelInternoLayout = new javax.swing.GroupLayout(PanelInterno);
+        PanelInterno.setLayout(PanelInternoLayout);
+        PanelInternoLayout.setHorizontalGroup(
+            PanelInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 184, Short.MAX_VALUE)
+        );
+        PanelInternoLayout.setVerticalGroup(
+            PanelInternoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 170, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout PanelCuadriculasLayout = new javax.swing.GroupLayout(PanelCuadriculas);
+        PanelCuadriculas.setLayout(PanelCuadriculasLayout);
+        PanelCuadriculasLayout.setHorizontalGroup(
+            PanelCuadriculasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelCuadriculasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(PanelInterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        PanelCuadriculasLayout.setVerticalGroup(
+            PanelCuadriculasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelCuadriculasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(PanelInterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
+        panelBotones.setBackground(new java.awt.Color(220, 220, 220));
+
+        btnBorrarJugada.setBackground(new java.awt.Color(204, 204, 0));
+        btnBorrarJugada.setText("Borrar Jugada");
+        btnBorrarJugada.setColor1(new java.awt.Color(204, 204, 0));
+        btnBorrarJugada.setColor2(new java.awt.Color(204, 204, 0));
+        btnBorrarJugada.setColor3(new java.awt.Color(204, 204, 0));
+        btnBorrarJugada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarJugadaActionPerformed(evt);
+            }
+        });
+
+        btnBorrarJuego.setBackground(new java.awt.Color(102, 102, 255));
+        btnBorrarJuego.setText("Borrar Juego");
+        btnBorrarJuego.setColor1(new java.awt.Color(102, 102, 255));
+        btnBorrarJuego.setColor2(new java.awt.Color(102, 102, 255));
+        btnBorrarJuego.setColor3(new java.awt.Color(102, 102, 255));
+
+        btnRehacerJugada.setBackground(new java.awt.Color(153, 51, 255));
+        btnRehacerJugada.setText("Rehacer Jugada");
+        btnRehacerJugada.setToolTipText("");
+        btnRehacerJugada.setColor1(new java.awt.Color(153, 51, 255));
+        btnRehacerJugada.setColor2(new java.awt.Color(153, 51, 255));
+        btnRehacerJugada.setColor3(new java.awt.Color(153, 51, 255));
+        btnRehacerJugada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRehacerJugadaActionPerformed(evt);
+            }
+        });
+
+        btnCargarJuego.setBackground(new java.awt.Color(51, 204, 255));
+        btnCargarJuego.setText("Cargar Juego");
+        btnCargarJuego.setColor1(new java.awt.Color(51, 204, 255));
+        btnCargarJuego.setColor2(new java.awt.Color(51, 204, 255));
+        btnCargarJuego.setColor3(new java.awt.Color(51, 204, 255));
+        btnCargarJuego.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCargarJuegoActionPerformed(evt);
+            }
+        });
+
+        btnGuardarJuego.setBackground(new java.awt.Color(255, 102, 102));
+        btnGuardarJuego.setText("Guardar Juego");
+        btnGuardarJuego.setColor1(new java.awt.Color(255, 102, 102));
+        btnGuardarJuego.setColor2(new java.awt.Color(255, 102, 102));
+        btnGuardarJuego.setColor3(new java.awt.Color(255, 102, 102));
+        btnGuardarJuego.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarJuegoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelBotonesLayout = new javax.swing.GroupLayout(panelBotones);
+        panelBotones.setLayout(panelBotonesLayout);
+        panelBotonesLayout.setHorizontalGroup(
+            panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBotonesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCargarJuego, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBorrarJuego, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRehacerJugada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGuardarJuego, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panelBotonesLayout.createSequentialGroup()
+                        .addComponent(btnBorrarJugada, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        panelBotonesLayout.setVerticalGroup(
+            panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBotonesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnBorrarJugada, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(btnBorrarJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRehacerJugada, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCargarJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnGuardarJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
+
+        btnJugar.setBackground(new java.awt.Color(255, 153, 0));
+        btnJugar.setText("Jugar");
+        btnJugar.setColor1(new java.awt.Color(255, 153, 0));
+        btnJugar.setColor2(new java.awt.Color(255, 153, 0));
+        btnJugar.setColor3(new java.awt.Color(255, 153, 0));
+        btnJugar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnJugarActionPerformed(evt);
+            }
+        });
+
+        btnTerminarJuego.setBackground(new java.awt.Color(0, 51, 102));
+        btnTerminarJuego.setText("Terminar Juego");
+        btnTerminarJuego.setColor1(new java.awt.Color(0, 51, 102));
+        btnTerminarJuego.setColor2(new java.awt.Color(0, 51, 102));
+        btnTerminarJuego.setColor3(new java.awt.Color(0, 51, 102));
+        btnTerminarJuego.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTerminarJuegoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(117, 117, 117)
-                .addComponent(pnlDigitosIzq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tbtCuadriculas, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlDigitosDer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(173, 173, 173))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnBorrarJugada, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(81, 81, 81)
-                        .addComponent(btnBorrarJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap(13, Short.MAX_VALUE)
+                                .addComponent(panelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(195, 195, 195))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(panelTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnTerminarJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(pnlDigitosDer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PanelCuadriculas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnRehacerJugada, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(pnlDigitosIzq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnTerminarJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(101, 101, 101)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnGuardarJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCargarJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(txtNombreJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(160, 160, 160))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(131, 131, 131)
-                .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(panelTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(92, 92, 92))
+                        .addComponent(lblNivel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 319, Short.MAX_VALUE)
+                        .addComponent(lblNombreJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(txtNombreJugador, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jLabel1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblNombreJugador)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tbtCuadriculas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlDigitosDer, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlDigitosIzq, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBorrarJugada, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBorrarJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardarJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRehacerJugada, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTerminarJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCargarJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 35, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(panelTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnTerminarJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 331, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PanelCuadriculas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlDigitosIzq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pnlDigitosDer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNivel))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
-
-        tbtCuadriculas.getAccessibleContext().setAccessibleName("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 772, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(12, 12, 12))
         );
 
         pack();
@@ -523,6 +465,26 @@ public class Jugar extends javax.swing.JFrame {
     private void botonRedondo6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRedondo6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botonRedondo6ActionPerformed
+
+    private void btnRehacerJugadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRehacerJugadaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRehacerJugadaActionPerformed
+
+    private void btnTerminarJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarJuegoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTerminarJuegoActionPerformed
+
+    private void btnCargarJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarJuegoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCargarJuegoActionPerformed
+
+    private void btnGuardarJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarJuegoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarJuegoActionPerformed
+
+    private void btnBorrarJugadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarJugadaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBorrarJugadaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -546,9 +508,6 @@ public class Jugar extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Jugar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(Jugar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Jugar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
         //</editor-fold>
 
         /* Create and display the form */
@@ -557,11 +516,14 @@ public class Jugar extends javax.swing.JFrame {
                 new Jugar().setVisible(true);
             }
         });
+    }   catch (UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(Jugar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Componentes.BotonRedondo botonRedondo2;
-    private Componentes.BotonRedondo botonRedondo3;
+    public javax.swing.JPanel PanelCuadriculas;
+    public javax.swing.JPanel PanelInterno;
     public Componentes.BotonRedondo btnBorrarJuego;
     public Componentes.BotonRedondo btnBorrarJugada;
     public Componentes.BotonRedondo btnCargarJuego;
@@ -575,7 +537,6 @@ public class Jugar extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JDesktopPane jDesktopPane3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -583,20 +544,14 @@ public class Jugar extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane1;
     public javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel panel3x3;
-    private javax.swing.JPanel panel4x10;
-    private javax.swing.JPanel panel4x4;
-    private javax.swing.JPanel panel4x5;
-    private javax.swing.JPanel panel4x6;
-    private javax.swing.JPanel panel4x7;
-    private javax.swing.JPanel panel4x8;
-    private javax.swing.JPanel panel4x9;
+    private javax.swing.JPanel jPanel4;
+    public javax.swing.JLabel lblNivel;
+    public javax.swing.JLabel lblNombreJugador;
+    public javax.swing.JPanel panelBotones;
     private javax.swing.JPanel panelTiempo;
     public javax.swing.JPanel pnlDigitosDer;
     public javax.swing.JPanel pnlDigitosIzq;
-    private javax.swing.JTabbedPane tbtCuadriculas;
     public javax.swing.JLabel txtHoras;
     public javax.swing.JLabel txtMinutos;
-    private javax.swing.JTextField txtNombreJugador;
     // End of variables declaration//GEN-END:variables
 }
