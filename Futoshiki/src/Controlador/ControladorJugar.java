@@ -141,12 +141,12 @@ public class ControladorJugar {
     private void ajustarPanelDigitos(){
     
         //El panel debe estar ajustado hacia la izquiera
-        if(configuracion.getPosicionVentana() == 2){
+        if(configuracion.getPosicionVentana() == 1){
         
             //Almacena el panel para crear los digitos necesarios
             panelDigitos = vista.pnlDigitosIzq;
             panelDigitos.setVisible(true);
-            vista.pnlDigitosDer.setVisible(true);
+            vista.pnlDigitosDer.setVisible(false);
         }
         else{ //El panel debe estar ajustado hacia la derecha
              //Almacena el panel para crear los digitos necesarios

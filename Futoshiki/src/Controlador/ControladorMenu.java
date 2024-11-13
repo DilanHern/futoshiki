@@ -31,7 +31,7 @@ public class ControladorMenu {
                 
                 //PRUEBA DATOS QUEMADOS CONFIGURACION
                 Configuracion configuracion = new Configuracion();
-                configuracion.setTamañoCuadricula(3);
+                configuracion.setTamañoCuadricula(5);
                 configuracion.setDificultad(1);
                 configuracion.setMultinivel(false);
                 configuracion.setReloj(1);
