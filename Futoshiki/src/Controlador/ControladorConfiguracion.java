@@ -114,7 +114,7 @@ public class ControladorConfiguracion {
      * @param vistaConfig representa la vista del menu de configuracion que el controlador va a manipular
      * @param configuracionCargada es la configuracion con la que cargó el juego al iniciar
      */
-    public ControladorConfiguracion(MenuPrincipal vistaPrincipal, MenuConfiguracion vistaConfig, Configuracion configuracionCargada){
+    public ControladorConfiguracion(MenuPrincipal vistaPrincipal, MenuConfiguracion vistaConfig, Configuracion configuracionCargada, Juego juego){
         this.vistaPrincipal = vistaPrincipal;
         this.vistaConfig = vistaConfig;
         

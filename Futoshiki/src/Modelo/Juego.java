@@ -1,6 +1,20 @@
 package Modelo;
 
+
 import java.util.ArrayList;
+import java.io.File;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  *
@@ -10,7 +24,7 @@ public class Juego {
     //atributos
     private ArrayList<Partida> partidas;
     private Configuracion configuracion;
-    
+    private Partida partidaActual;
     //constructor
     /**
      * El constructor del juego no recibe paramentros ya que sus atributos se definen de forma separada
@@ -18,8 +32,31 @@ public class Juego {
     public Juego(){
         //incializa la lista
         partidas = new ArrayList<Partida>();
+        partidaActual = null;
     }
 
+    /**
+     * @return the partidaActual
+     */
+    public Partida getPartidaActual() {
+        return partidaActual;
+    }
+
+    /**
+     * realiza una copia de la partida para que no se modifique
+     * @param partida the partidaActual to set
+     */
+    public void setPartidaActual(Partida partida) {
+        partidaActual = new Partida("",0);
+        partidaActual.setTamano(partida.getTamano());
+        partidaActual.setNivel(partida.getNivelString());
+        partidaActual.setHaFinalizado(false);
+        partidaActual.setDesigualdades(partida.getDesigualdades());
+        partidaActual.setConstantes(partida.getConstantes());
+        partidaActual.setCuadricula(partida.getCuadricula());
+    }
+    
+    
     /**
      * @return the partidas
      */
@@ -52,7 +89,6 @@ public class Juego {
      * @param partida la cual se anade a la lista de partidas por primera vez
      */
     public void agregarPartida(Partida partida){
-    
         this.partidas.add(partida);
         
     }
@@ -77,4 +113,148 @@ public class Juego {
             
         }
     }
+    
+     /**
+     * @param etiqueta representa la etiqueta del xml que se busca
+     * @param elemento representa el elemento en el que se buscara la etiqueta
+     * @returns String retorna el valor que se encontro dentro de la etiqueta
+     */
+    private static String getValue(String etiqueta, Element elemento){
+        
+        NodeList nodos = elemento.getElementsByTagName(etiqueta).item(0).getChildNodes();
+        Node nodo = (Node) nodos.item(0);
+        return nodo.getNodeValue();              
+    }
+    
+    
+    /**
+     * @param partida representa la partida a la que se van a cargar las desigualdades
+     * @param desigualdades representa la lista de nodos del archivo xml de la cual se van a cargar
+     * @returns Partida retorna la partida cargada
+     */
+    private Partida cargarDesigualdades(Partida partida, NodeList desigualdades){
+        
+        for (int k=0; k<desigualdades.getLength();k++){
+                Node nodo = desigualdades.item(k);
+                
+                if (nodo.getNodeType() == Node.ELEMENT_NODE) {
+                    Element elemento = (Element)nodo;
+                    partida.agregarDesigualdad(elemento.getFirstChild().getNodeValue());
+                }                
+            }
+        
+        return partida;
+    }
+    
+    /**
+     * @param partida representa la partida a la que se van a cargar las constantes
+     * @param constantes representa la lista de nodos del archivo xml de la cual se van a cargar
+     * @returns Partida retorna la partida cargada
+     */
+    private Partida cargarConstantes(Partida partida, NodeList constantes){
+        
+        for (int k=0; k<constantes.getLength();k++){
+                Node nodo = constantes.item(k);
+                
+                if (nodo.getNodeType() == Node.ELEMENT_NODE) {
+                    Element elemento = (Element)nodo;
+                    String constanteTexto = elemento.getFirstChild().getNodeValue();
+                    String[] partes = constanteTexto.split(",");; 
+                    int constante =Integer.valueOf(partes[0]);
+                    int fila = Integer.valueOf(partes[1]);
+                    int columna =Integer.valueOf(partes[2]);
+                    
+                    partida.asignarConstante(fila, columna, constante);
+                    partida.agregarConstante(constanteTexto);
+                }                
+            }
+        
+        return partida;
+    }
+    /**
+     * Realiza la carga de las partidas que estan previamente cargadas y son utilizadas durante la ejecucion
+     */
+    public void CargarPartidas(){
+
+        try {
+            
+            File archivo = new File("futoshiki2024partidas.xml");
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document partidasxml = builder.parse(archivo);
+            partidasxml.getDocumentElement().normalize(); 
+            
+            NodeList nodos = partidasxml.getElementsByTagName("partida");
+            
+            for (int k=0; k<nodos.getLength();k++){
+                Node nodo = nodos.item(k);
+                
+                if (nodo.getNodeType() == Node.ELEMENT_NODE) {
+                    Element elemento = (Element)nodo;
+                    String nivel = getValue( "nivel", elemento);
+                    String tamano = getValue( "cuadricula", elemento);
+                    
+                    Partida partida = new Partida(nivel, Integer.parseInt(tamano));
+                    
+                    NodeList desigualdades = elemento.getElementsByTagName("des");
+                    cargarDesigualdades(partida, desigualdades);
+                    NodeList constantes = elemento.getElementsByTagName("cons");
+                    cargarConstantes(partida, constantes);
+                    
+                    //agrega la partida a las partidas del juego en ejecucion
+                    agregarPartida(partida);
+                }                
+            }
+        } catch (Exception ex){ 
+            ex.printStackTrace();
+        }
+        
+    }
+    
+    /**
+     * @param tamano de la cuadricula de la partida a buscar
+     * @param dificultad de la cuadricula de la partida a buscar
+     * @param repetir define si ya se usaron todas la partidas que fueron guardadas por lo que se deben repetir
+     */
+    private Partida buscarPartida(int tamano, int dificultad, boolean repetir){
+    
+       //recorre y busca un partida con la que se pueda jugar
+        for(Partida partida : partidas){
+            if(partida.getTamano() == tamano){
+                
+                if(partida.getNivel() == dificultad){
+                
+                    //valida que no se haya jugado la partida
+                    if(!partida.getHaFinalizado()){
+                        partida.setHaFinalizado(true); //se asigna a la partida true para indicar que se va a utilizar y ya no se usa mas a excepcion de que se ocupe repetir
+                        return partida;
+                    }
+                    else if(repetir){ //valida si se puede repetir partidas
+                        return partida;
+                    }
+                }
+            }
+        }
+        //no se encontro una partida listas
+        return null;
+    }
+    
+    /**
+     * @param dificultad representa el nivel que se busca, esto por que si es multinivel la configuracion no podra controlar la subida de niveles
+     * @return Partida retorna la partida encontrada
+     */
+    public Partida escogerPartida(int dificultad){
+        
+        int tamano = configuracion.getTamañoCuadricula();
+        
+        Partida partida = buscarPartida(tamano, dificultad,false);
+        //en caso de recibir null indica que ya se jugaron todas las partidas y se debe buscar una que ya haya sido utilizada
+        if(partida==null){
+            partida = buscarPartida(tamano, dificultad,true);
+        }
+        
+        return partida;
+    }
+
+    
 }

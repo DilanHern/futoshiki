@@ -80,6 +80,8 @@ public class MenuConfiguracion extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(204, 102, 0));
         jLabel1.setText("Configuración");
 
+        tabConfig.setBackground(new java.awt.Color(204, 102, 0));
+        tabConfig.setForeground(new java.awt.Color(255, 255, 255));
         tabConfig.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 
         tabTamaño.setBackground(new java.awt.Color(255, 255, 255));
@@ -467,8 +469,8 @@ public class MenuConfiguracion extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(145, 145, 145))))
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(120, 120, 120))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

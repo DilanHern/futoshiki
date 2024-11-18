@@ -18,10 +18,9 @@ public class ControladorMenu {
      * @param configuracionCargada es la configuracion actual del juego
      * 
      */
-    public ControladorMenu(MenuPrincipal vista, MenuConfiguracion vistaConfig){
+    public ControladorMenu(MenuPrincipal vista, MenuConfiguracion vistaConfig, Configuracion configuracionCargada, Juego juego){
     
         this.vista = vista;
-        
         
         
         //Agregar eventos listeners
@@ -32,21 +31,9 @@ public class ControladorMenu {
                 @Override
                 public void actionPerformed(ActionEvent e){
 
-                    Juego juego = new Juego();
-
-                    //PRUEBA DATOS QUEMADOS CONFIGURACION
-                    Configuracion configuracion = new Configuracion();
-                    configuracion.setTamañoCuadricula(5);
-                    configuracion.setDificultad(1);
-                    configuracion.setMultinivel(false);
-                    configuracion.setReloj(1);
-                    configuracion.setPosicionVentana(1);
-                    configuracion.setNombreJugador("Camila");
-                    juego.setConfiguracion(configuracion);
-
-                    //Crea la vista con su respectivo controlador
                     Jugar jugar = new Jugar();
-                    ControladorJugar controladorjugar = new ControladorJugar(jugar, juego);
+                    
+                    ControladorJugar controladorjugar = new ControladorJugar(jugar, juego,vistaConfig);
                     jugar.setVisible(true);
                     vista.setVisible(false);
                 }

@@ -24,13 +24,18 @@ public class Futoshiki {
             }
         }
         
+        //Creacion y carga del objeto juego que contiene las partidas durante la ejecucion 
+        Juego juego = new Juego();
+        juego.CargarPartidas();
+        juego.setConfiguracion(configuracionCargada);
+        
         //creacion de menus
         MenuConfiguracion vistaConfig = new MenuConfiguracion();
         MenuPrincipal vistaMenu = new MenuPrincipal();
         
         //creacion de controladores
-        ControladorMenu menu = new ControladorMenu(vistaMenu, vistaConfig);
-        ControladorConfiguracion controladorConfig = new ControladorConfiguracion(vistaMenu, vistaConfig, configuracionCargada);
+        ControladorMenu menu = new ControladorMenu(vistaMenu, vistaConfig,configuracionCargada, juego);
+        ControladorConfiguracion controladorConfig = new ControladorConfiguracion(vistaMenu, vistaConfig, configuracionCargada,juego);
         
         vistaMenu.setVisible(true);
     }
