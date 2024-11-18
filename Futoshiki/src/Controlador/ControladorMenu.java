@@ -32,10 +32,9 @@ public class ControladorMenu {
                 public void actionPerformed(ActionEvent e){
 
                     Jugar jugar = new Jugar();
-                    
-                    ControladorJugar controladorjugar = new ControladorJugar(jugar, juego,vistaConfig);
                     jugar.setVisible(true);
                     vista.setVisible(false);
+                    ControladorJugar controladorjugar = new ControladorJugar(jugar, juego,vistaConfig);
                 }
             }
         );

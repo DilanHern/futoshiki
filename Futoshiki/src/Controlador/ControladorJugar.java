@@ -481,15 +481,15 @@ public class ControladorJugar {
         }else{
             partida = new Partida(partidaRespuesta);
             juego.setPartidaActual(partida);
+             //Nombre del nivel de la partida
+            this.vista.lblNivel.setText(dificultad);
+
+            //Nombre del jugador
+            this.vista.lblNombreJugador.setText("Jugador " + configuracion.getNombreJugador());
+            generarCuadricula();
+            inicializarTimer();
         }
-        //Nombre del nivel de la partida
-        
-        this.vista.lblNivel.setText(dificultad);
-        
-        //Nombre del jugador
-        this.vista.lblNombreJugador.setText("Jugador " + configuracion.getNombreJugador());
-        generarCuadricula();
-        inicializarTimer();
+       
          
     }
     
@@ -503,7 +503,7 @@ public class ControladorJugar {
         this.configuracion = juego.getConfiguracion();
         this.juego=juego;
         
-        inicializarVista();
+        
         
         //Anade el evento al boton TerminarJuego, genera la vista del menu  con su respectivo controlador modifica la visibilidad de las vistas
         this.vista.btnTerminarJuego.addActionListener(new ActionListener(){
@@ -517,9 +517,10 @@ public class ControladorJugar {
                 vistaMenu.setVisible(true);
                 //Quita la visibilidad de la ventana actual
                 vista.setVisible(false);
-                if(reloj.isRunning())
+                if(reloj!=null && reloj.isRunning()){
                     reloj.stop(); //para el temporizador en caso de que se este ejecutando
-                juego.getPartidaActual().limpiarCuadricula();
+                    juego.getPartidaActual().limpiarCuadricula();
+                }
             }
         
         });
@@ -544,7 +545,7 @@ public class ControladorJugar {
                  }
             }
         });
-    
+        inicializarVista();
     }
     
     
