@@ -35,7 +35,7 @@
 
     <partida>
         <nivel>Facil</nivel>
-        <cuadricula>7</cuadricula>
+        <cuadricula>10</cuadricula>
        
         <!-- Constantes -->
         <cons>3,0,0</cons>
@@ -89,7 +89,7 @@
 
     <partida>
         <nivel>Intermedio</nivel>
-        <cuadricula>9</cuadricula>
+        <cuadricula>10</cuadricula>
         
         <des>mef,0,0</des>
         <des>mef,0,2</des>
