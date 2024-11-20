@@ -485,7 +485,10 @@ public class ControladorJugar {
             this.vista.lblNivel.setText(dificultad);
 
             //Nombre del jugador
-            this.vista.lblNombreJugador.setText("Jugador " + configuracion.getNombreJugador());
+            if(!configuracion.getNombreJugador().equals(""))
+                this.vista.lblNombreJugador.setText("Jugador " + configuracion.getNombreJugador());
+            else
+                this.vista.lblNombreJugador.setText("Jugador Ingcognito");
             generarCuadricula();
             inicializarTimer();
         }
