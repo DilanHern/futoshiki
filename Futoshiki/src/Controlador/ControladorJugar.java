@@ -236,7 +236,7 @@ public class ControladorJugar {
             public void actionPerformed(ActionEvent e){
                     
                 MenuPrincipal vistaMenu = new MenuPrincipal();
-                ControladorMenu controladorMenu = new ControladorMenu(vistaMenu);
+                //ControladorMenu controladorMenu = new ControladorMenu(vistaMenu);
                 //Muestra el menu
                 vistaMenu.setVisible(true);
                 //Quita la visibilidad de la ventana actual
@@ -258,7 +258,6 @@ public class ControladorJugar {
             }
         
         });
-    
     }
     
     

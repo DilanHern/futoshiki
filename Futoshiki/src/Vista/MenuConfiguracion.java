@@ -32,7 +32,17 @@ public class MenuConfiguracion extends javax.swing.JFrame {
         botonesReloj = new javax.swing.ButtonGroup();
         botonesVentana = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        panelRegistrarse = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtNombreRegistrarse = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtPinRegistrarse = new javax.swing.JPasswordField();
+        jLabel8 = new javax.swing.JLabel();
+        txtCorreoRegistrarse = new javax.swing.JTextField();
+        btnCancelarRegistrarse = new Componentes.BotonRedondo();
+        btnRegistrarseRegistrarse = new Componentes.BotonRedondo();
+        panelConfiguracion = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         tabConfig = new javax.swing.JTabbedPane();
         tabTamaño = new javax.swing.JPanel();
@@ -67,6 +77,11 @@ public class MenuConfiguracion extends javax.swing.JFrame {
         tabNombre = new javax.swing.JPanel();
         txtNombre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtPIN = new javax.swing.JPasswordField();
+        btnOlvidePin = new Componentes.BotonRedondo();
+        btnRegistrarse = new Componentes.BotonRedondo();
         btnGuardar = new Componentes.BotonRedondo();
         btnCancelar = new Componentes.BotonRedondo();
 
@@ -74,7 +89,84 @@ public class MenuConfiguracion extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 102, 0));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        panelRegistrarse.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel5.setFont(new java.awt.Font("Cascadia Mono", 0, 48)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(204, 102, 0));
+        jLabel5.setText("Registrarse");
+
+        jLabel6.setForeground(new java.awt.Color(204, 102, 0));
+        jLabel6.setText("Nombre:");
+
+        jLabel7.setForeground(new java.awt.Color(204, 102, 0));
+        jLabel7.setText("PIN:");
+
+        jLabel8.setForeground(new java.awt.Color(204, 102, 0));
+        jLabel8.setText("Correo electrónico:");
+
+        btnCancelarRegistrarse.setText("Cancelar");
+        btnCancelarRegistrarse.setColor1(new java.awt.Color(255, 0, 0));
+        btnCancelarRegistrarse.setColor2(new java.awt.Color(255, 0, 0));
+        btnCancelarRegistrarse.setColor3(new java.awt.Color(255, 0, 0));
+
+        btnRegistrarseRegistrarse.setText("Registrarse");
+        btnRegistrarseRegistrarse.setColor1(new java.awt.Color(102, 255, 0));
+        btnRegistrarseRegistrarse.setColor2(new java.awt.Color(102, 255, 0));
+        btnRegistrarseRegistrarse.setColor3(new java.awt.Color(102, 255, 0));
+        btnRegistrarseRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarseRegistrarseActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelRegistrarseLayout = new javax.swing.GroupLayout(panelRegistrarse);
+        panelRegistrarse.setLayout(panelRegistrarseLayout);
+        panelRegistrarseLayout.setHorizontalGroup(
+            panelRegistrarseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRegistrarseLayout.createSequentialGroup()
+                .addGap(133, 133, 133)
+                .addGroup(panelRegistrarseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelRegistrarseLayout.createSequentialGroup()
+                        .addComponent(btnCancelarRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(79, 79, 79)
+                        .addComponent(btnRegistrarseRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelRegistrarseLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(panelRegistrarseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)
+                            .addComponent(txtCorreoRegistrarse)
+                            .addComponent(txtPinRegistrarse)
+                            .addComponent(txtNombreRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel5))
+                .addContainerGap(147, Short.MAX_VALUE))
+        );
+        panelRegistrarseLayout.setVerticalGroup(
+            panelRegistrarseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRegistrarseLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5)
+                .addGap(38, 38, 38)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNombreRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtPinRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addGap(18, 18, 18)
+                .addComponent(txtCorreoRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addGroup(panelRegistrarseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelarRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRegistrarseRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45))
+        );
+
+        panelConfiguracion.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Cascadia Mono", 0, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 102, 0));
@@ -118,6 +210,11 @@ public class MenuConfiguracion extends javax.swing.JFrame {
         botonesTamaño.add(btn7x7);
         btn7x7.setForeground(new java.awt.Color(204, 102, 0));
         btn7x7.setText("7x7");
+        btn7x7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn7x7ActionPerformed(evt);
+            }
+        });
 
         btn8x8.setBackground(new java.awt.Color(255, 255, 255));
         botonesTamaño.add(btn8x8);
@@ -406,6 +503,26 @@ public class MenuConfiguracion extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(204, 102, 0));
         jLabel2.setText("Escriba su nombre:");
 
+        jLabel3.setForeground(new java.awt.Color(204, 102, 0));
+        jLabel3.setText("PIN:");
+
+        jLabel4.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel4.setText("Si el nombre no está en uso, debe registrarse");
+
+        txtPIN.setBackground(new java.awt.Color(204, 204, 204));
+
+        btnOlvidePin.setText("Olvide mi PIN");
+        btnOlvidePin.setColor1(new java.awt.Color(204, 102, 0));
+        btnOlvidePin.setColor2(new java.awt.Color(204, 102, 0));
+        btnOlvidePin.setColor3(new java.awt.Color(204, 102, 0));
+
+        btnRegistrarse.setText("Registrarse");
+        btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarseActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout tabNombreLayout = new javax.swing.GroupLayout(tabNombre);
         tabNombre.setLayout(tabNombreLayout);
         tabNombreLayout.setHorizontalGroup(
@@ -413,10 +530,19 @@ public class MenuConfiguracion extends javax.swing.JFrame {
             .addGroup(tabNombreLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(tabNombreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNombre)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(tabNombreLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(0, 220, Short.MAX_VALUE)))
+                        .addGroup(tabNombreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPIN, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 87, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabNombreLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnOlvidePin, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         tabNombreLayout.setVerticalGroup(
@@ -426,7 +552,17 @@ public class MenuConfiguracion extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(200, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addComponent(jLabel3)
+                .addGap(14, 14, 14)
+                .addComponent(txtPIN, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGroup(tabNombreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnOlvidePin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         tabConfig.addTab("Nombre del jugador", tabNombre);
@@ -451,34 +587,34 @@ public class MenuConfiguracion extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelConfiguracionLayout = new javax.swing.GroupLayout(panelConfiguracion);
+        panelConfiguracion.setLayout(panelConfiguracionLayout);
+        panelConfiguracionLayout.setHorizontalGroup(
+            panelConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelConfiguracionLayout.createSequentialGroup()
                 .addContainerGap(53, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(panelConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelConfiguracionLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(105, 105, 105))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelConfiguracionLayout.createSequentialGroup()
                         .addComponent(tabConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelConfiguracionLayout.createSequentialGroup()
                         .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(145, 145, 145))))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        panelConfiguracionLayout.setVerticalGroup(
+            panelConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelConfiguracionLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(tabConfig, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -490,15 +626,25 @@ public class MenuConfiguracion extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelConfiguracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(panelRegistrarse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelConfiguracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(panelRegistrarse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -515,18 +661,6 @@ public class MenuConfiguracion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn4x4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn4x4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn4x4ActionPerformed
-
-    private void btn3x3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3x3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn3x3ActionPerformed
-
-    private void btn8x8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn8x8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn8x8ActionPerformed
-
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -535,25 +669,49 @@ public class MenuConfiguracion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void btnFacilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacilActionPerformed
+    private void btnTemporizadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTemporizadorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnFacilActionPerformed
-
-    private void btnIntermedioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIntermedioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnIntermedioActionPerformed
-
-    private void btnCronometroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCronometroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCronometroActionPerformed
+    }//GEN-LAST:event_btnTemporizadorActionPerformed
 
     private void btnNoRelojActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoRelojActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnNoRelojActionPerformed
 
-    private void btnTemporizadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTemporizadorActionPerformed
+    private void btnCronometroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCronometroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTemporizadorActionPerformed
+    }//GEN-LAST:event_btnCronometroActionPerformed
+
+    private void btnIntermedioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIntermedioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnIntermedioActionPerformed
+
+    private void btnFacilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacilActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFacilActionPerformed
+
+    private void btn8x8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn8x8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn8x8ActionPerformed
+
+    private void btn4x4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn4x4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn4x4ActionPerformed
+
+    private void btn3x3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3x3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn3x3ActionPerformed
+
+    private void btn7x7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn7x7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn7x7ActionPerformed
+
+    private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarseActionPerformed
+
+    private void btnRegistrarseRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseRegistrarseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarseRegistrarseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -605,6 +763,7 @@ public class MenuConfiguracion extends javax.swing.JFrame {
     public javax.swing.JRadioButton btn8x8;
     public javax.swing.JRadioButton btn9x9;
     public Componentes.BotonRedondo btnCancelar;
+    public Componentes.BotonRedondo btnCancelarRegistrarse;
     public javax.swing.JRadioButton btnCronometro;
     public javax.swing.JRadioButton btnDerecha;
     public javax.swing.JRadioButton btnDificil;
@@ -614,15 +773,25 @@ public class MenuConfiguracion extends javax.swing.JFrame {
     public javax.swing.JRadioButton btnIzquierda;
     public javax.swing.JRadioButton btnNoMultinivel;
     public javax.swing.JRadioButton btnNoReloj;
+    public Componentes.BotonRedondo btnOlvidePin;
+    public Componentes.BotonRedondo btnRegistrarse;
+    public Componentes.BotonRedondo btnRegistrarseRegistrarse;
     public javax.swing.JRadioButton btnSiMultinivel;
     public javax.swing.JRadioButton btnTemporizador;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     public javax.swing.JLabel lblHoras;
     public javax.swing.JLabel lblMins;
     public javax.swing.JLabel lblSegs;
+    public javax.swing.JPanel panelConfiguracion;
+    public javax.swing.JPanel panelRegistrarse;
     public javax.swing.JSpinner spinnerHoras;
     public javax.swing.JSpinner spinnerMins;
     public javax.swing.JSpinner spinnerSegs;
@@ -633,6 +802,10 @@ public class MenuConfiguracion extends javax.swing.JFrame {
     private javax.swing.JPanel tabPosicion;
     private javax.swing.JPanel tabReloj;
     private javax.swing.JPanel tabTamaño;
+    public javax.swing.JTextField txtCorreoRegistrarse;
     public javax.swing.JTextField txtNombre;
+    public javax.swing.JTextField txtNombreRegistrarse;
+    public javax.swing.JPasswordField txtPIN;
+    public javax.swing.JPasswordField txtPinRegistrarse;
     // End of variables declaration//GEN-END:variables
 }
