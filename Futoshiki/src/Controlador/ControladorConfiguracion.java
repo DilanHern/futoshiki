@@ -13,25 +13,39 @@ import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.util.List;
-import java.util.Set;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.NoSuchProviderException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  *
  * @author Dilan
  */
 public class ControladorConfiguracion {
-    private MenuPrincipal vistaPrincipal;
     private MenuConfiguracion vistaConfig;
-    private Configuracion configuracionCargada;
+    
+    //ATRIBUTOS PARA ENVIAR REPORTES
+    private static String emailDe = "paquimetrocartago@gmail.com";
+    private static String contraseñaDe = "vofx ztal oawe yary";
+    
+    private Properties mProperties = new Properties();;
+    private Session mSession;
+    private MimeMessage mCorreo;
+    //FIN DE ATRIBUTOS DE REPORTES
     
     public void refrescarConfiguracion(MenuConfiguracion vistaConfig, Configuracion configuracionCargada){
         //mostrar configuraciones actuales en la vista:
@@ -105,7 +119,6 @@ public class ControladorConfiguracion {
         this.vistaConfig.txtNombre.setText(configuracionCargada.getNombreJugador());
         //pin
         this.vistaConfig.txtPIN.setText(configuracionCargada.getPin());
-        //correo
         
         
         //Asignamos el minimo y maximo de los spinners del temporizador
@@ -116,6 +129,59 @@ public class ControladorConfiguracion {
         this.vistaConfig.spinnerMins.setModel(valorMins);
         this.vistaConfig.spinnerSegs.setModel(valorSegs);
     }
+    
+    /**
+     * Crea un correo electrónico configurando la sesión y el mensaje.
+     * Establece los parámetros necesarios para enviar el correo electrónico.
+     *
+     * @param correo El correo electrónico del destinatario.
+     * @param asunto El asunto del correo electrónico.
+     * @param cuerpo El cuerpo del correo electrónico.
+     */
+     public void crearEmail(String cuerpo, String asunto, String correo){
+        //Protocolo para el envio de correos
+        mProperties.put("mail.smtp.host", "smtp.gmail.com");
+        mProperties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+        mProperties.setProperty("mail.smtp.starttls.enable", "true");
+        mProperties.setProperty("mail.smtp.port", "587");
+        mProperties.setProperty("mail.smtp.user", emailDe);
+        mProperties.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
+        mProperties.setProperty("mail.smtp.auth", "true");
+
+       mSession = Session.getDefaultInstance(mProperties);
+
+
+        try {        
+            mCorreo = new MimeMessage(mSession);
+            mCorreo.setFrom(new InternetAddress(emailDe));
+            mCorreo.setRecipient(Message.RecipientType.TO, new InternetAddress(correo)); //correo del usuario
+            mCorreo.setSubject(asunto); //Asunto
+            mCorreo.setText(cuerpo, "ISO-8859-1", "html");
+
+        } catch (AddressException ex) {
+            Logger.getLogger(ControladorConfiguracion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MessagingException ex) {
+            Logger.getLogger(ControladorConfiguracion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     }
+     
+     /**
+    * Envía un correo electrónico utilizando la configuración de la sesión.
+    * Establece la conexión con el servidor SMTP y envía el mensaje.
+    */
+     public void enviarEmail(){
+        try {
+            Transport mTransport = mSession.getTransport("smtp");
+            mTransport.connect(emailDe, contraseñaDe);
+            mTransport.sendMessage(mCorreo, mCorreo.getRecipients(Message.RecipientType.TO));
+            mTransport.close();
+            
+        } catch (NoSuchProviderException ex) {
+            Logger.getLogger(ControladorConfiguracion.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MessagingException ex) {
+            Logger.getLogger(ControladorConfiguracion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     }
     
     /**
      * Esta funcion permite guardar toda la configuracion en el archivo
@@ -179,7 +245,6 @@ public class ControladorConfiguracion {
         configuracionCargada.setNombreJugador(vistaConfig.txtNombre.getText());
         //pin
         configuracionCargada.setPin(new String(vistaConfig.txtPIN.getPassword()) );
-        //correo
 
         //GUARDAR CONFIGURACION EN EL ARCHIVO
         try {
@@ -195,21 +260,6 @@ public class ControladorConfiguracion {
         vistaPrincipal.setVisible(true); 
     }
     
-    /*
-    public boolean verificarCorreo(MenuConfiguracion vistaConfig, Configuracion configuracionCargada){
-        Set<String> nombres =  configuracionCargada.getJugadoresRegistrados().keySet();
-        for (String cadaNombre : nombres){
-            ArrayList datos = (ArrayList) configuracionCargada.getJugadoresRegistrados().get(cadaNombre);
-            System.out.println(datos.get(1));
-            if (datos.get(1).equals(vistaConfig.txtCorreo.getText())){
-                JOptionPane.showMessageDialog(null, "El correo ingresado ya esta siendo usado!");
-                return false;
-            }
-        }
-        return true;
-    }
-    */
-    
     /**
      * Muestra en el menu la configuracion actual del juego, además de controlar los eventos listeners
      * @param vistaPrincipal representa la vista del menu de inicio para mostrarlo u ocultarlo
@@ -217,7 +267,6 @@ public class ControladorConfiguracion {
      * @param configuracionCargada es la configuracion con la que cargó el juego al iniciar
      */
     public ControladorConfiguracion(MenuPrincipal vistaPrincipal, MenuConfiguracion vistaConfig, Configuracion configuracionCargada){
-        this.vistaPrincipal = vistaPrincipal;
         this.vistaConfig = vistaConfig;
         
         refrescarConfiguracion(vistaConfig, configuracionCargada);
@@ -249,18 +298,171 @@ public class ControladorConfiguracion {
             }
         );
         
-        //envia el pin al correo
-        this.vistaConfig.btnOlvidePin.addItemListener(
-          new ItemListener() {
+        //abrir panel al correo
+        this.vistaConfig.btnOlvidePin.addActionListener(
+            new ActionListener() {
                 @Override
-                public void itemStateChanged(ItemEvent e) {
-                    //verificar existencia de correo:
-                    
-                    //enviar correo a: vistaConfig.txtCorreo()
+                public void actionPerformed(ActionEvent e) {
+                    //1. hacer panel de olvide pin
+                    vistaConfig.panelOlvidePin.setVisible(true);
+                    vistaConfig.panelConfiguracion.setVisible(false);
                 }
           }
         );
+        //enviar correo
+        this.vistaConfig.btnEnviarCorreo.addActionListener(
+            new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    //verificar nombre
+                    if (vistaConfig.txtNombreCorreo.getText().equals("")){
+                        JOptionPane.showMessageDialog(null, "Ingrese algún nombre a recuperar!");
+                        return;
+                    }
+                    if (!configuracionCargada.getJugadoresRegistrados().containsKey(vistaConfig.txtNombreCorreo.getText())){
+                        JOptionPane.showMessageDialog(null, "Este nombre no ha sido registrado!");
+                        return;
+                    }
+                    //enviar correo
+                    String correo = configuracionCargada.getJugadoresRegistrados().get(vistaConfig.txtNombreCorreo.getText()).get(1);
+                    
+                    //crear nuevo pin
+                    Random random = new Random(); //Generar un número aleatorio entre 1000 y 9999
+                    int numeroAleatorio = 1000 + random.nextInt(9000);
+                    ArrayList<String> nuevosDatos = new ArrayList<>();
+                    
+                    nuevosDatos.add(String.valueOf(numeroAleatorio));
+                    nuevosDatos.add(correo);
+                    configuracionCargada.getJugadoresRegistrados().put(vistaConfig.txtNombreCorreo.getText(), nuevosDatos);
+                    //enviar correo
+                    String cuerpo = "TU NUEVO PIN: " + String.valueOf(numeroAleatorio);
+                    crearEmail(cuerpo, "CAMBIO DE PIN", correo);
+                    enviarEmail();
+                    
+                    JOptionPane.showMessageDialog(null, "Se ha enviado el PIN temporal de acceso a su correo!");
+                    vistaConfig.panelOlvidePin.setVisible(false);
+                    vistaConfig.panelConfiguracion.setVisible(true);
+                }
+            }
+        );
+        //cancelar
+        this.vistaConfig.btnCancelarCorreo.addActionListener(
+            new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    vistaConfig.txtNombreCorreo.setText("");
+                    vistaConfig.panelOlvidePin.setVisible(false);
+                    vistaConfig.panelConfiguracion.setVisible(true);
+                }
+            }
+        );
         
+        //panel de cambiar PIN
+        //abrir
+        this.vistaConfig.btnCambiarPin.addActionListener(
+            new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    vistaConfig.panelConfiguracion.setVisible(false);
+                    vistaConfig.panelCambiarPin.setVisible(true);
+                }
+            }
+        );
+        //cancelar
+        this.vistaConfig.btnCancelarCambiar.addActionListener(
+            new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    vistaConfig.panelConfiguracion.setVisible(true);
+                    vistaConfig.panelCambiarPin.setVisible(false);
+                }
+            }
+        );
+        
+        //Cambiar pin
+        //no permite escribir mas de 30 caracteres en el nombre del jugador EN CAMBIAR PIN
+        this.vistaConfig.txtNombreCambiar.addKeyListener(
+            new KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent e) { 
+                    if (vistaConfig.txtNombreCambiar.getText().length() >= 30 ) // se limita a la escritura de 30 caracteres
+                        e.consume(); 
+                }  
+            }
+        );
+        //no permite escribir mas de 4 caracteres en el PIN actual y que no sean enteros EN CAMBIAR PIN
+        this.vistaConfig.txtPinActualCambiar.addKeyListener(
+            new KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent e) { 
+                    if (vistaConfig.txtPinActualCambiar.getText().length() >= 4 || !Character.isDigit(e.getKeyChar()) ) // se limita a la escritura de 4 caracteres y deben de ser numeros
+                        e.consume(); 
+                }  
+            }
+        );
+        //no permite escribir mas de 4 caracteres en el PIN A CAMBIAR y que no sean enteros EN CAMBIAR PIN
+        this.vistaConfig.txtNuevoPinCambiar.addKeyListener(
+            new KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent e) { 
+                    if (vistaConfig.txtNuevoPinCambiar.getText().length() >= 4 || !Character.isDigit(e.getKeyChar()) ) // se limita a la escritura de 4 caracteres y deben de ser numeros
+                        e.consume(); 
+                }  
+            }
+        );
+        //boton cambiar pin
+        this.vistaConfig.btnCambiarCambiar.addActionListener(
+            new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    //el nombre no puede estar vacio
+                    if (vistaConfig.txtNombreCambiar.getText().equals("")){
+                        JOptionPane.showMessageDialog(null, "El nombre no puede estar vacio!");
+                        return;
+                    }
+                    //verificar que el pin actual ingresado sea correcto
+                    if (vistaConfig.txtPinActualCambiar.getText().length() < 4){
+                        JOptionPane.showMessageDialog(null, "El pin actual ingresado debe de contener 4 carácteres!");
+                        return;
+                    }
+                    //verificar que el pin a cambiar ingresado sea correcto
+                    if (vistaConfig.txtNuevoPinCambiar.getText().length() < 4){
+                        JOptionPane.showMessageDialog(null, "El nuevo pin ingresado debe de contener 4 carácteres!");
+                        return;
+                    }
+                    //verificar que el nuevo pin  no es el mismo al anterior
+                    if (new String(vistaConfig.txtPinActualCambiar.getPassword()).equals(new String(vistaConfig.txtNuevoPinCambiar.getPassword()))){
+                        JOptionPane.showMessageDialog(null, "El nuevo pin debe de ser distinto al actual!");
+                        return;
+                    }
+                    //verificar que el nombre existe
+                    Map<String, ArrayList<String>> datos = configuracionCargada.getJugadoresRegistrados();
+                    if (!datos.containsKey(vistaConfig.txtNombreCambiar.getText())){ //verificar si el nombre  está registrado
+                        JOptionPane.showMessageDialog(null, "Este nombre no se encuentra registrado!");
+                        return;
+                    }
+                    //verificar que el pin actual es correcto y valido
+                    if (!datos.get(vistaConfig.txtNombreCambiar.getText()).get(0).equals(new String(vistaConfig.txtPinActualCambiar.getPassword())) ){ //el pin ingresado no es el correcto
+                        JOptionPane.showMessageDialog(null, "El PIN ingresado no es correcto!");
+                        return;
+                    }
+                    //cambiar pin
+                    ArrayList<String> nuevosDatos = new ArrayList<>();
+                    nuevosDatos.add(new String(vistaConfig.txtNuevoPinCambiar.getPassword()));
+                    nuevosDatos.add(datos.get(vistaConfig.txtNombreCambiar.getText()).get(1));
+                    datos.put(vistaConfig.txtNombreCambiar.getText(), nuevosDatos);
+                    JOptionPane.showMessageDialog(null, "Su PIN fue cambiado con éxito!");
+                    
+                    vistaConfig.txtNombreCambiar.setText("");
+                    vistaConfig.txtNuevoPinCambiar.setText("");
+                    vistaConfig.txtPinActualCambiar.setText("");
+                    vistaConfig.panelConfiguracion.setVisible(true);
+                    vistaConfig.panelCambiarPin.setVisible(false);
+                }
+            }
+        );
+        
+        //panel de configuracion
         //no permite escribir mas de 30 caracteres en el nombre del jugador
         this.vistaConfig.txtNombre.addKeyListener(
             new KeyAdapter() {
@@ -324,6 +526,13 @@ public class ControladorConfiguracion {
             new ActionListener(){ 
                 @Override
                 public void actionPerformed(ActionEvent e){
+                    //verificar si el jugador es anonimo, en caso de serlo, guarda la info
+                    if (vistaConfig.txtNombre.getText().equals("") && vistaConfig.txtPIN.getText().length() == 0){
+                        configuracionCargada.setNombreJugador("");
+                        configuracionCargada.setPin("");
+                        guardarDatos(vistaConfig, vistaPrincipal, configuracionCargada);
+                        return;
+                    }
                     //verificar que el pin ingresado sea correcto
                     if (vistaConfig.txtPIN.getText().length() < 4){
                         JOptionPane.showMessageDialog(null, "El pin ingresado debe de contener 4 carácteres!");

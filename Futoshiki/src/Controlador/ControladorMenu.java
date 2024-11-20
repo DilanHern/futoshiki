@@ -60,6 +60,8 @@ public class ControladorMenu {
                 vistaConfig.tabConfig.setSelectedIndex(0); //cada vez que abre, abre en el tab 0 (tamaño cuadricula)
                 vistaConfig.panelConfiguracion.setVisible(true);
                 vistaConfig.panelRegistrarse.setVisible(false);
+                vistaConfig.panelOlvidePin.setVisible(false);
+                vistaConfig.panelCambiarPin.setVisible(false);
                 vistaConfig.setVisible(true);
                 vista.setVisible(false); 
             }

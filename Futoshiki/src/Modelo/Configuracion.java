@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -31,7 +30,6 @@ public class Configuracion implements Serializable{
     private int posicionVentana; //1 = derecha, 2 = izquierda
     private String nombreJugador; //String entre 0 y 30 caracteres
     private String pin; //pin de 4 caracteres
-    private String correo; //correo electrónico del jugador
     private int horas; //horas del temporizador (0 por defecto)
     private int minutos; //minutos del temporizador (0 por defecto)
     private int segundos; //segundos del temporizador (0 por defecto)
@@ -50,7 +48,6 @@ public class Configuracion implements Serializable{
         posicionVentana = 1;
         nombreJugador = "";
         pin = "";
-        correo = "";
         horas = 0;
         minutos = 0;
         segundos = 0;
@@ -66,14 +63,13 @@ public class Configuracion implements Serializable{
      * @param posicionVentana la posición en la que estará la ventana
      * @param nombreJugador el nombre del jugador
      * @param pin el pin del jugador
-     * @param correo el correo del jugador
      * @param horas las horas del temporizador
      * @param minutos los minutos del temporizador
      * @param segundos los segundos del temporizador
      * @param jugadoresRegistrados hashmap con todos los jugadores registrados
      */
     public Configuracion(int tamañoCuadricula, int dificultad, boolean multinivel, int reloj, 
-    int posicionVentana, String nombreJugador, String pin, String correo, int horas, int minutos, int segundos, Map<String, ArrayList<String>> jugadoresRegistrados){
+    int posicionVentana, String nombreJugador, String pin, int horas, int minutos, int segundos, Map<String, ArrayList<String>> jugadoresRegistrados){
         this.tamañoCuadricula = tamañoCuadricula;
         this.dificultad = dificultad;
         this.multinivel = multinivel;
@@ -81,7 +77,6 @@ public class Configuracion implements Serializable{
         this.posicionVentana = posicionVentana;
         this.nombreJugador = nombreJugador;
         this.pin = pin;
-        this.correo = correo;
         this.horas = horas;
         this.minutos = minutos;
         this.segundos = segundos;
@@ -100,20 +95,6 @@ public class Configuracion implements Serializable{
      */
     public void setJugadoresRegistrados(Map<String, ArrayList<String>> jugadoresRegistrados){
         this.jugadoresRegistrados = jugadoresRegistrados;
-    }
-    
-    /**
-     * @return el correo asignado
-     */
-    public String getCorreo(){
-        return correo;
-    }
-    
-    /**
-     * @param correo el correo a asignar
-     */
-    public void setCorreo(String correo){
-        this.correo = correo;
     }
     
     /**
