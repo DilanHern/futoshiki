@@ -13,6 +13,9 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ArrayList;
 
 /**
  *
@@ -26,10 +29,13 @@ public class Configuracion implements Serializable{
     private int reloj; //1 = cronometro, 2 = Temporizador, 3 = 0
     private int posicionVentana; //1 = derecha, 2 = izquierda
     private String nombreJugador; //String entre 0 y 30 caracteres
+    private String pin; //pin de 4 caracteres
     private int horas; //horas del temporizador (0 por defecto)
     private int minutos; //minutos del temporizador (0 por defecto)
     private int segundos; //segundos del temporizador (0 por defecto)
     private static Configuracion instancia;
+    private Map<String, ArrayList<String>> jugadoresRegistrados; //diccionario/hashmap con los jugadores registrados, 
+    //en el arraylist, el indice 0 es el pin y el indice 1 es el correo
     
     /**
      * Método constructor de la clase Configuracion, asigna todos los atributos por defecto / por omision
@@ -41,9 +47,11 @@ public class Configuracion implements Serializable{
         reloj = 1;
         posicionVentana = 1;
         nombreJugador = "";
+        pin = "";
         horas = 0;
         minutos = 0;
         segundos = 0;
+        jugadoresRegistrados = new HashMap<>();
     }
     
     /**
@@ -54,23 +62,54 @@ public class Configuracion implements Serializable{
      * @param reloj el tipo de reloj que utilizara
      * @param posicionVentana la posición en la que estará la ventana
      * @param nombreJugador el nombre del jugador
+     * @param pin el pin del jugador
      * @param horas las horas del temporizador
      * @param minutos los minutos del temporizador
      * @param segundos los segundos del temporizador
+     * @param jugadoresRegistrados hashmap con todos los jugadores registrados
      */
     public Configuracion(int tamañoCuadricula, int dificultad, boolean multinivel, int reloj, 
-    int posicionVentana, String nombreJugador, int horas, int minutos, int segundos){
+    int posicionVentana, String nombreJugador, String pin, int horas, int minutos, int segundos, Map<String, ArrayList<String>> jugadoresRegistrados){
         this.tamañoCuadricula = tamañoCuadricula;
         this.dificultad = dificultad;
         this.multinivel = multinivel;
         this.reloj = reloj;
         this.posicionVentana = posicionVentana;
         this.nombreJugador = nombreJugador;
+        this.pin = pin;
         this.horas = horas;
         this.minutos = minutos;
         this.segundos = segundos;
+        this.jugadoresRegistrados = jugadoresRegistrados;
     }
     
+    /**
+     * @return el hashmap de los jugadores
+     */
+    public Map<String, ArrayList<String>> getJugadoresRegistrados(){
+        return jugadoresRegistrados;
+    }
+    
+    /**
+     * @param jugadoresRegistrados el hashmap de todos los jugadores registrados 
+     */
+    public void setJugadoresRegistrados(Map<String, ArrayList<String>> jugadoresRegistrados){
+        this.jugadoresRegistrados = jugadoresRegistrados;
+    }
+    
+    /**
+     * @return el pin asignado
+     */
+    public String getPin(){
+        return pin;
+    }
+    
+    /**
+     * @param pin el pin a asignar
+     */
+    public void setPin(String pin){
+        this.pin = pin;
+    }
     
     /**
      * @return las horas asignadas
