@@ -1,4 +1,36 @@
 <partidasFutoshiki>
+
+    <partida>
+        <nivel>Facil</nivel>
+        <cuadricula>4</cuadricula>
+        <!-- Desigualdades -->
+        <des>maf,0,1</des>
+        <des>mef,1,2</des>
+        <des>maf,2,3</des>
+        <des>mac,1,0</des>
+        <!-- Constantes -->
+        <cons>1,0,0</cons>
+        <cons>4,3,1</cons>
+        <cons>3,2,2</cons>
+    </partida>
+
+    <partida>
+        <nivel>Intermedio</nivel>
+        <cuadricula>4</cuadricula>
+        <!-- Desigualdades -->
+        <des>mef,0,1</des>
+        <des>mac,1,0</des>
+        <des>maf,1,2</des>
+        <des>mac,2,3</des>
+        <des>mef,3,2</des>
+        <des>maf,0,2</des>
+        <!-- Constantes -->
+        <cons>2,0,0</cons>
+        <cons>3,3,3</cons>
+        <cons>4,2,1</cons>
+        <cons>1,1,2</cons>
+    </partida>
+
     <partida>
         <nivel>Dificil</nivel>
         <cuadricula>4</cuadricula>
@@ -13,8 +45,6 @@
         <cons>2,1,0</cons> 
 
     </partida>
-
-
 
     <partida>
         <nivel>Dificil</nivel>

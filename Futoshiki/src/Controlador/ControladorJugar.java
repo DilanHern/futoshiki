@@ -79,13 +79,13 @@ public class ControladorJugar {
         if(segundos == 0){
             
             if(minutos>0){
-                segundos=60;
+                segundos=59;
                 minutos--;
             }
         }
         if(minutos==0){
             if(horas>0){
-                minutos=60;
+                minutos=59;
                 horas--;
             }
         }
@@ -114,7 +114,7 @@ public class ControladorJugar {
                 //actualiza las horas para que continue el tiempo que fue llevado
                 horas= configuracion.getHoras();
                 minutos = configuracion.getMinutos();
-                segundos = configuracion.getSegundos() +1;
+                segundos = configuracion.getSegundos();
                 tipo=1; //actualiza el tipo de reloj para que continue a cronometro
                 reloj.start();
                 
@@ -139,7 +139,7 @@ public class ControladorJugar {
      */
     private void ActualizarCronometro(){
         segundos++;
-        if(segundos == 60){
+        if(segundos == 61){
             segundos=0;
             minutos++;
         }
@@ -323,7 +323,7 @@ public class ControladorJugar {
                        //valido si hay algo malo en la jugada y la muestro
                        if(respuesta!=1){
                        
-                          if(respuesta==2){
+                          if(respuesta==2){ 
                               boton.setBackground(Color.red);
                               JOptionPane.showMessageDialog(f,"JUGADA NO ES VÁLIDA PORQUE EL ELEMENTO YA ESTÁ EN LA COLUMNA "); 
                               boton.setBackground(Color.white);
@@ -351,8 +351,17 @@ public class ControladorJugar {
                           boton.setText("");
                        }else{
                            boolean gane = juego.getPartidaActual().validarGane();
-                           if(gane)
+                           if(gane){
                                JOptionPane.showMessageDialog(f,"Felicidades ha ganado la partida "); 
+                               //actualiza la partida actual para ponerla en true e indicar que ya finalizado
+                               juego.getPartidaActual().setHaFinalizado(true);
+                               
+                               //En caso de ser multinivel, debe continuar al siguiente nivel por lo que actualiza
+                               if(configuracion.getMultinivel()){
+                                   vista.PanelInterno.removeAll();
+                                   inicializarVista();
+                               }
+                           }
                        }
                    }else{
                         if(panelDigitos!=null){ //el panel se mostro y el juego comenzo
@@ -443,7 +452,7 @@ public class ControladorJugar {
      * Genera la incializacion de la vista Jugar la adapta segun la configuracion necesaria
      */
     private void inicializarVista(){
-        tipo=configuracion.getReloj();
+        
         String dificultad = "Nivel: ";
         int nivel = 0;
         //valida que no sea multinivel, de serlo define el nivel de la partida a jugar
@@ -452,11 +461,14 @@ public class ControladorJugar {
             if(juego.getPartidaActual() == null){
                 nivel = 1;
             }
-            else if(juego.getPartidaActual().getNivel() !=3){
+            else if(juego.getPartidaActual().getNivel() !=3 && juego.getPartidaActual().getHaFinalizado()){ //valida que la partida termino, si no seguira en el mismo nivel
                 nivel = juego.getPartidaActual().getNivel()+1;
             }
             else{
-                nivel = 3;
+                if(!juego.getPartidaActual().getHaFinalizado())
+                    nivel = juego.getPartidaActual().getNivel();
+                else
+                    nivel = 3;
             }
         }else{
         
@@ -490,7 +502,7 @@ public class ControladorJugar {
             else
                 this.vista.lblNombreJugador.setText("Jugador Ingcognito");
             generarCuadricula();
-            inicializarTimer();
+            
         }
        
          
@@ -533,12 +545,9 @@ public class ControladorJugar {
         
          @Override
             public void actionPerformed(ActionEvent e){
-                    
-                ajustarPanelDigitos();
-                vista.btnJugar.setVisible(false);
-                vista.panelBotones.setVisible(true);
-                
-                if(configuracion.getReloj() == 1)
+                tipo=configuracion.getReloj();
+                inicializarTimer();
+                 if(configuracion.getReloj() == 1)
                     reloj.start();
                 else if(configuracion.getReloj()==2){
                    horas= configuracion.getHoras();
@@ -546,6 +555,12 @@ public class ControladorJugar {
                    segundos = configuracion.getSegundos() +1;
                    reloj.start();
                  }
+                 //en caso de no tener tiempo el reloj no comienza
+                ajustarPanelDigitos();
+                vista.btnJugar.setVisible(false);
+                vista.panelBotones.setVisible(true);
+                
+               
             }
         });
         inicializarVista();
