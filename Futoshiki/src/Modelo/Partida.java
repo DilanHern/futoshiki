@@ -323,6 +323,35 @@ public class Partida {
     }
     
     /**
+     * elimina el valor de la cuadricula
+     * @param fila representa la fila de la celda
+     * @param columna representa la columna
+     */
+    public void EliminarValor(String fila, String columna){
+    
+        int filaInteger = Integer.parseInt(fila);
+        int columnaInteger = Integer.parseInt(columna);
+        
+        cuadricula[filaInteger][columnaInteger] = 0;
+    }
+    
+    /**
+     * anade el valor a la cuadricula
+     * @param numero representa el numero que se quiere colocar en la celda
+     * @param fila representa la fila de la celda
+     * @param columna representa la columna
+     */
+     public void AgregarValor(String numero, String fila, String columna){
+    
+        int filaInteger = Integer.parseInt(fila);
+        int columnaInteger = Integer.parseInt(columna);
+        int valor = Integer.parseInt(numero);
+        
+        cuadricula[filaInteger][columnaInteger] = valor;
+         
+    }
+    
+    /**
      * @param numero representa el numero que se quiere colocar en la celda
      * @param fila representa la fila de la celda
      * @param columna representa la columna

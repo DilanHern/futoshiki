@@ -11,6 +11,7 @@ import Modelo.*;
 import Vista.MenuConfiguracion;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -18,7 +19,10 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -34,7 +38,9 @@ public class ControladorJugar {
     private Configuracion configuracion; //contienen la configuracion establecida por el usuario
     private JPanel panelDigitos = null; //contiene el panel del lado que esta en la configuracion
     private BotonRedondo digitoPresionado; //almacena el boton digito que fue presionado
-    
+    private List<String> jugadasEliminadas = new ArrayList<String>(); //Almancena las jugadas en caso de que se quiera rehacer y estas fueron borradas
+    private List<String> jugadasRealizadas = new ArrayList<String>(); //Almancena las jugadas realizadas estas funcionan por si se borra algua
+    private boolean borrador = false; //Sera true en caso de ser presionado, y este funciona para poder borrar una celda, por lo que se valida si esta en true
     //------------------TIMER------------------------
     private Timer reloj;
     private int horas=0; //controla las horas que han concurrido
@@ -296,9 +302,113 @@ public class ControladorJugar {
         }
         
     }
+      /**
+    *Elimina la jugada de la pila de jugadas realizadas como es con el borrador la jugada no es en orden y no se podra hacer pop
+    * @param columna indica en cual columna de la martriz esta el boton a eliminar de la jugada realizada
+    * @param fila indica en cual fila se encuentra el boton
+    */
+    private void removerJugadaRealizada(int fila, int columna){
+    
+        String filaS= String.valueOf(fila);
+        String columnaS= String.valueOf(columna);
+        int indexJugada=0;//almacena el index de la jugada encontrada para eliminarla
+        //recorre las ultimas jugadas para encontrar la que se quiere borrar
+        for(String ultimaJugada : jugadasRealizadas){
+            
+            String[] partesJugada = ultimaJugada.split(",");//divide la fila, columna, valor de la ultima jugada para acceder a ellas
+            if(partesJugada[0].equals(filaS) && partesJugada[1].equals(columnaS)){
+                System.out.println(ultimaJugada);
+                break;
+            }
+            indexJugada++;
+        }
+        jugadasRealizadas.remove(indexJugada);
+    }
+    
+     /**
+    *Elimina el valor de la celda pero guarda la jugada en la pila
+    * @param boton al que se le va a asignar el evento
+    * @param fila indica en cual fila se encuentra el boton
+    * @param columna indica en cual columna de la martriz esta el boton
+    */
+    private void borradorPresionado(int fila, int columna, JButton boton){
+    
+         //al seleccionar una celda el borrador se desactiva
+         borrador=false;
+                       
+         //Se guarda el valor en la pila de jugadas por si se quiere rehacer
+         String filaS= String.valueOf(fila);
+         String columnaS= String.valueOf(columna);
+         String valor = boton.getText();
+         
+        //anade la jugada a la pila pero valida que la celda tenga un numero, es decir que se le haya hecho una jugada      
+        if(!valor.equals("")){
+             jugadasEliminadas.add(filaS + "," + columnaS+"," + valor);
+             juego.getPartidaActual().EliminarValor(filaS,columnaS); //Elimina el valor de la cuadricula a nivel logico
+             //reinicia el valor de la celda
+             boton.setText("");
+             removerJugadaRealizada(fila,columna);
+        }
+    }
+    
+    /**
+     * Obtiene la ultima jugada eliminada que fue guardada en la pila de jugadas eliminadas, y la restaura en la celda
+     */
+    private void rehacerJugada(){
+        
+        String ultimaJugada = jugadasEliminadas.removeLast();
+        String[] partesJugada = ultimaJugada.split(",");//divide la fila, columna, valor de la ultima jugada para acceder a ellas
+        jugadasRealizadas.add(ultimaJugada);
+        //obtiene todos los botones que estan contenidos en el panel, es decir las celdas en un arreglo
+        Component[] componentes = vista.PanelInterno.getComponents();
+        
+        for(int i =0; i<componentes.length; i++){
+        
+            if (componentes[i] instanceof JButton) {
+                JButton boton = (JButton) componentes[i]; // Cast a JButton
+                String[] nombreBoton = boton.getName().split(","); //el nombre del boton posee su fila y columna por lo se se separa en dos partes
+                
+                if(partesJugada[0].equals(nombreBoton[0]) && partesJugada[1].equals(nombreBoton[1])){
+                    
+                    boton.setText(partesJugada[2]); //asigno el valor a la celda en la vista
+                    juego.getPartidaActual().AgregarValor(partesJugada[2], partesJugada[0], partesJugada[1]);
+                    
+                }
+                
+             }
+        }
+    }
+    
+        /**
+     * Obtiene la ultima jugada y la elimina anadiendola a las jugadas borradas para que sea restaurada si se desea
+     */
+    private void borrarJugada(){
+        
+        String ultimaJugada = jugadasRealizadas.removeLast();
+        String[] partesJugada = ultimaJugada.split(",");//divide la fila, columna, valor de la ultima jugada para acceder a ellas
+        
+        //obtiene todos los botones que estan contenidos en el panel, es decir las celdas en un arreglo
+        Component[] componentes = vista.PanelInterno.getComponents();
+        
+        for(int i =0; i<componentes.length; i++){
+        
+            if (componentes[i] instanceof JButton) {
+                JButton boton = (JButton) componentes[i]; // Cast a JButton
+                String[] nombreBoton = boton.getName().split(","); //el nombre del boton posee su fila y columna por lo se se separa en dos partes
+               
+                if(partesJugada[0].equals(nombreBoton[0]) && partesJugada[1].equals(nombreBoton[1])){
+                    boton.setText("");
+                    jugadasEliminadas.add(ultimaJugada);
+                    juego.getPartidaActual().EliminarValor(partesJugada[0], partesJugada[1]);
+                }
+                
+             }
+        }
+    }
     
    /**
     * Genera el evento del boton cuando es presionado para asignarle un numero
+    * El evento pueder ser generado por que se selecciono con el borrador
     * @param boton al que se le va a asignar el evento
     * @param fila indica en cual fila se encuentra el boton
     * @param columna indica en cual columna de la martriz esta el boton
@@ -311,63 +421,78 @@ public class ControladorJugar {
               
                //boton presionado
                public void actionPerformed(ActionEvent e) {
-                   JFrame f=new JFrame();  
-                   
-                   //se debe validar que haya un digito presionado del panel de digitos
-                   if(digitoPresionado!=null){
-                        //numero que posee el boton
-                       String numero=digitoPresionado.getText();
-                       boton.setText(numero);
-                       int respuesta = juego.getPartidaActual().validarMovimiento(Integer.parseInt(numero),fila, columna);
+                   if(borrador){ //el borrador se habia seleccionado
                        
-                       //valido si hay algo malo en la jugada y la muestro
-                       if(respuesta!=1){
-                       
-                          if(respuesta==2){ 
-                              boton.setBackground(Color.red);
-                              JOptionPane.showMessageDialog(f,"JUGADA NO ES VÁLIDA PORQUE EL ELEMENTO YA ESTÁ EN LA COLUMNA "); 
-                              boton.setBackground(Color.white);
-                          }
-                          else if(respuesta==3){
-                                boton.setBackground(Color.red);
-                              JOptionPane.showMessageDialog(f,"JUGADA NO ES VÁLIDA PORQUE EL ELEMENTO YA ESTÁ EN LA FILA "); 
-                              boton.setBackground(Color.white);
-                          }
-                          else if(respuesta==4){
-                                boton.setBackground(Color.red);
-                              JOptionPane.showMessageDialog(f, """
-                                                               JUGADA NO ES VALIDA PORQUE NO CUMPLE CON LA RESTRICCION
-                                                               DE MAYOR """); 
-                              boton.setBackground(Color.white);
-                          }
-                          else if(respuesta==5){
-                                boton.setBackground(Color.red);
-                              JOptionPane.showMessageDialog(f, """
-                                                               JUGADA NO ES VALIDA PORQUE NO CUMPLE CON LA RESTRICCION
-                                                               DE MENOR"""); 
-                              boton.setBackground(Color.white);
-                          }
-                         //reinicio el valor del boton
-                          boton.setText("");
-                       }else{
-                           boolean gane = juego.getPartidaActual().validarGane();
-                           if(gane){
-                               JOptionPane.showMessageDialog(f,"Felicidades ha ganado la partida "); 
-                               //actualiza la partida actual para ponerla en true e indicar que ya finalizado
-                               juego.getPartidaActual().setHaFinalizado(true);
-                               
-                               //En caso de ser multinivel, debe continuar al siguiente nivel por lo que actualiza
-                               if(configuracion.getMultinivel()){
-                                   vista.PanelInterno.removeAll();
-                                   inicializarVista();
+                        borradorPresionado(fila,columna,boton);
+                        
+                   }else{                   
+                        JFrame f=new JFrame();  
+
+                        //se debe validar que haya un digito presionado del panel de digitos
+                        if(digitoPresionado!=null){
+                             //numero que posee el boton
+                            String numero=digitoPresionado.getText();
+                            boton.setText(numero);
+                            int respuesta = juego.getPartidaActual().validarMovimiento(Integer.parseInt(numero),fila, columna);
+
+                            //valido si hay algo malo en la jugada y la muestro
+                            if(respuesta!=1){
+
+                               if(respuesta==2){ 
+                                   boton.setBackground(Color.red);
+                                   JOptionPane.showMessageDialog(f,"JUGADA NO ES VÁLIDA PORQUE EL ELEMENTO YA ESTÁ EN LA COLUMNA "); 
+                                   boton.setBackground(Color.white);
                                }
-                           }
-                       }
-                   }else{
-                        if(panelDigitos!=null){ //el panel se mostro y el juego comenzo
-                              JOptionPane.showMessageDialog(f,"Selecciona un digito para colocar en la celda"); 
+                               else if(respuesta==3){
+                                     boton.setBackground(Color.red);
+                                   JOptionPane.showMessageDialog(f,"JUGADA NO ES VÁLIDA PORQUE EL ELEMENTO YA ESTÁ EN LA FILA "); 
+                                   boton.setBackground(Color.white);
+                               }
+                               else if(respuesta==4){
+                                     boton.setBackground(Color.red);
+                                   JOptionPane.showMessageDialog(f, """
+                                                                    JUGADA NO ES VALIDA PORQUE NO CUMPLE CON LA RESTRICCION
+                                                                    DE MAYOR """); 
+                                   boton.setBackground(Color.white);
+                               }
+                               else if(respuesta==5){
+                                     boton.setBackground(Color.red);
+                                   JOptionPane.showMessageDialog(f, """
+                                                                    JUGADA NO ES VALIDA PORQUE NO CUMPLE CON LA RESTRICCION
+                                                                    DE MENOR"""); 
+                                   boton.setBackground(Color.white);
+                               }
+                              //reinicio el valor del boton
+                               boton.setText("");
+                            }else{
+                                
+                                
+                                boolean gane = juego.getPartidaActual().validarGane();
+                                if(gane){
+                                    JOptionPane.showMessageDialog(f,"Felicidades ha ganado la partida "); 
+                                    //actualiza la partida actual para ponerla en true e indicar que ya finalizado
+                                    juego.getPartidaActual().setHaFinalizado(true);
+
+                                    //En caso de ser multinivel, debe continuar al siguiente nivel por lo que actualiza
+                                    if(configuracion.getMultinivel()){
+                                        vista.PanelInterno.removeAll();
+                                        inicializarVista();
+                                    }
+                                }else{//almacena la jugada que fue realizada en la pila de las jugadas realizadas
+                                    String filaS= String.valueOf(fila);
+                                    String columnaS= String.valueOf(columna);
+                                    String valor = boton.getText();
+                                    jugadasRealizadas.add(filaS + "," + columnaS+"," + valor);
+                                    System.out.println(jugadasRealizadas.getLast());
+                                }
+                                
+                            }
+                        }else{
+                             if(panelDigitos!=null){ //el panel se mostro y el juego comenzo
+                                   JOptionPane.showMessageDialog(f,"Selecciona un digito para colocar en la celda"); 
+                             }
                         }
-                   }
+                    }
                }
            });
         
@@ -437,7 +562,8 @@ public class ControladorJugar {
                          vista.PanelInterno.add(desigualdadColumna, gridLayout); // anade el texto al panel
                     }
                    
-                    
+                    //Asigno nombre a la celda para que sea mas sencillo saber a que fila y columna pertenece
+                    cuadro.setName(String.valueOf(f) +","+String.valueOf(c));
                     eventoCelda(cuadro,f,c);
             }
                 
@@ -561,6 +687,51 @@ public class ControladorJugar {
                 vista.panelBotones.setVisible(true);
                 
                
+            }
+        });
+        
+        this.vista.btnRehacerJugada.addActionListener(new ActionListener(){
+        
+         @Override
+            public void actionPerformed(ActionEvent e){
+                //valida que haya jugadas borradas que pueda rehacer, de no ser asi le va a indicar
+               if(jugadasEliminadas.isEmpty()){
+               
+                   JFrame f=new JFrame();  
+                   JOptionPane.showMessageDialog(f,"NO SE HA BORRADO JUGADAS"); 
+               }
+               else{
+                   rehacerJugada(); //permite rehacer la utlima jugada eliminada
+               }
+            }
+        });
+        
+         this.vista.btnBorrarJugada.addActionListener(new ActionListener(){
+        
+         @Override
+            public void actionPerformed(ActionEvent e){
+                //valida que haya jugadas hechas que pueda borrar, de no ser asi le va a indicar
+               if(jugadasRealizadas.isEmpty()){
+               
+                   JFrame f=new JFrame();  
+                   JOptionPane.showMessageDialog(f,"REALICE UNA JUGADA"); 
+               }
+               else{
+                   borrarJugada(); //permite borrar la ultima jugada que se hizo
+               }
+            }
+        });
+        
+         this.vista.labelBorrador.addMouseListener(new MouseAdapter(){
+        
+         @Override
+            public void mouseClicked(MouseEvent e){
+              
+              if(borrador)
+                  borrador=false;
+              else
+                  borrador=true;
+                
             }
         });
         inicializarVista();
