@@ -66,7 +66,9 @@ public class ControladorMenu {
             @Override
             public void actionPerformed(ActionEvent e){
                 vista.setVisible(false);
-                System.exit(0); //termina la ejecucion
+                AcercaDe vistaAcerca = new AcercaDe();
+                vistaAcerca.setVisible(true);
+                ControladorAcercaDe acercaDe = new ControladorAcercaDe(vista, configuracionCargada,juego,vistaAcerca);
             }
         });
          
