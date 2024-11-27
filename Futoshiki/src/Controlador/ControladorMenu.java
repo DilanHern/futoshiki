@@ -1,5 +1,6 @@
 package Controlador;
 
+import Vista.MenuTop10;
 import Vista.*;
 import Modelo.*;
 
@@ -10,16 +11,16 @@ import java.awt.event.ActionListener;
 public class ControladorMenu {
     
     private MenuPrincipal vista;
-    private MenuConfiguracion vistaConfig;
     
      /**
      * @param vista representa la vista del menu principal que el controlador va a manipular
      * @param vistaConfig representa la vista del menu de configuracion para mostrarlo u ocultarlo
+     * @param vistaTop representa la vista del menu del Top 10
      * @param configuracionCargada es la configuracion actual del juego
+     * @param juego representa el juego
      * 
      */
-    public ControladorMenu(MenuPrincipal vista, MenuConfiguracion vistaConfig, Configuracion configuracionCargada, Juego juego){
-    
+    public ControladorMenu(MenuPrincipal vista, MenuConfiguracion vistaConfig, MenuTop10 vistaTop, Configuracion configuracionCargada, Juego juego){
         this.vista = vista;
         
         
@@ -34,7 +35,7 @@ public class ControladorMenu {
                     Jugar jugar = new Jugar();
                     jugar.setVisible(true);
                     vista.setVisible(false);
-                    ControladorJugar controladorjugar = new ControladorJugar(jugar, juego,vistaConfig);
+                    ControladorJugar controladorjugar = new ControladorJugar(jugar, juego,vistaConfig, vistaTop);
                 }
             }
         );
@@ -51,6 +52,15 @@ public class ControladorMenu {
                 vistaConfig.setVisible(true);
                 vista.setVisible(false); 
             }
+        });
+        
+        //Añade el evento del boton Top10
+        this.vista.btnTop10.addActionListener(new ActionListener(){
+           @Override
+           public void actionPerformed(ActionEvent e){
+               vistaTop.setVisible(true);
+               vista.setVisible(false);
+           }
         });
         
         //Anade el evento del boton salir, quita la ventana y termina el programa

@@ -27,7 +27,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnJugar = new Componentes.BotonRedondo();
         btnAyuda = new Componentes.BotonRedondo();
         btnAcercaDe = new Componentes.BotonRedondo();
-        botonRedondo1 = new Componentes.BotonRedondo();
+        btnTop10 = new Componentes.BotonRedondo();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 153, 51));
@@ -98,10 +98,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        botonRedondo1.setText("Top 10");
-        botonRedondo1.setColor1(new java.awt.Color(0, 255, 204));
-        botonRedondo1.setColor2(new java.awt.Color(0, 255, 204));
-        botonRedondo1.setColor3(new java.awt.Color(0, 255, 204));
+        btnTop10.setText("Top 10");
+        btnTop10.setColor1(new java.awt.Color(0, 255, 204));
+        btnTop10.setColor2(new java.awt.Color(0, 255, 204));
+        btnTop10.setColor3(new java.awt.Color(0, 255, 204));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -120,7 +120,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                             .addComponent(btnAyuda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnAcercaDe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botonRedondo1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnTop10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(162, 162, 162))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -137,7 +137,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAcercaDe, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(botonRedondo1, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                .addComponent(btnTop10, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
@@ -230,12 +230,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Componentes.BotonRedondo botonRedondo1;
     public Componentes.BotonRedondo btnAcercaDe;
     public Componentes.BotonRedondo btnAyuda;
     public Componentes.BotonRedondo btnConfiguracion;
     public Componentes.BotonRedondo btnJugar;
     public Componentes.BotonRedondo btnSalir;
+    public Componentes.BotonRedondo btnTop10;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel6;

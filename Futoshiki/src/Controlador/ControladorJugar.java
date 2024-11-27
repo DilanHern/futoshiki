@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import Modelo.*;
 import Vista.MenuConfiguracion;
+import Vista.MenuTop10;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -639,7 +640,7 @@ public class ControladorJugar {
         @param juego representa la configuracion y partidas establecida por el usuario en la seccion de configuracion
         @param vistaConf representa las vista de configuracion, es utilizada para ser enviada por parametro
      */
-    public ControladorJugar(Jugar vista, Juego juego, MenuConfiguracion vistaConf){
+    public ControladorJugar(Jugar vista, Juego juego, MenuConfiguracion vistaConf, MenuTop10 vistaTop){
         this.vista = vista;
         this.configuracion = juego.getConfiguracion();
         this.juego=juego;
@@ -653,7 +654,7 @@ public class ControladorJugar {
             public void actionPerformed(ActionEvent e){
                     
                 MenuPrincipal vistaMenu = new MenuPrincipal();
-                ControladorMenu controladorMenu = new ControladorMenu(vistaMenu,vistaConf, juego.getConfiguracion(), juego);
+                ControladorMenu controladorMenu = new ControladorMenu(vistaMenu,vistaConf, vistaTop, juego.getConfiguracion(), juego);
                 //Muestra el menu
                 vistaMenu.setVisible(true);
                 //Quita la visibilidad de la ventana actual

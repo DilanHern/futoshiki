@@ -47,6 +47,11 @@ public class ControladorConfiguracion {
     private MimeMessage mCorreo;
     //FIN DE ATRIBUTOS DE REPORTES
     
+    /**
+     * Refresca la configuracion del menu con la configuracion actual
+     * @param vistaConfig
+     * @param configuracionCargada 
+     */
     public void refrescarConfiguracion(MenuConfiguracion vistaConfig, Configuracion configuracionCargada){
         //mostrar configuraciones actuales en la vista:
         

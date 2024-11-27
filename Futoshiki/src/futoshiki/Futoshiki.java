@@ -1,8 +1,10 @@
 package futoshiki;
+import Vista.MenuTop10;
 import Vista.*;
 import Controlador.*;
 import Modelo.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 public class Futoshiki {
 
@@ -24,6 +26,21 @@ public class Futoshiki {
             }
         }
         
+        //cargar el top de los archivos
+        ArrayList<ArrayList<Top10>> top10Cargado = Top10.cargarTop10("futoshiki2024top10.txt");
+        //si no hay archivos, crea la configuracion por defecto y la guarda
+        if (top10Cargado == null){
+            //creamos todos los top10 vacios
+            top10Cargado = Top10.crearTop10Vacio();
+            try {
+                Top10.guardarTop("futoshiki2024top10.txt", top10Cargado);
+            }
+            catch (IOException e){
+                JOptionPane.showMessageDialog(null, "Hubo un error guardando el top en el juego!" + e.getMessage());
+                e.printStackTrace(); // Imprime la traza de la excepción en la consola);
+            }
+        }
+        
         //Creacion y carga del objeto juego que contiene las partidas durante la ejecucion 
         Juego juego = new Juego();
         juego.CargarPartidas();
@@ -32,11 +49,12 @@ public class Futoshiki {
         //creacion de menus
         MenuConfiguracion vistaConfig = new MenuConfiguracion();
         MenuPrincipal vistaMenu = new MenuPrincipal();
+        MenuTop10 vistaTop = new MenuTop10();
         
         //creacion de controladores
-        ControladorMenu menu = new ControladorMenu(vistaMenu, vistaConfig,configuracionCargada, juego);
-        ControladorConfiguracion controladorConfig = new ControladorConfiguracion(vistaMenu, vistaConfig, configuracionCargada,juego);
-        
+        ControladorMenu menu = new ControladorMenu(vistaMenu, vistaConfig, vistaTop, configuracionCargada, juego);
+        ControladorConfiguracion controladorConfig = new ControladorConfiguracion(vistaMenu, vistaConfig, configuracionCargada, juego);
+        ControladorTop10 controladorTop = new ControladorTop10(vistaMenu, vistaTop, top10Cargado);
         vistaMenu.setVisible(true);
     }
     
