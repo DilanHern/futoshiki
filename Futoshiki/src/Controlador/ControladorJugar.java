@@ -792,7 +792,21 @@ public class ControladorJugar {
          @Override
             public void mouseClicked(MouseEvent e){
               
-                salirPartida();
+                    Object[] options = { "Volver al menu principal", "Seguir jugando" }; 
+                    int choice = JOptionPane.showOptionDialog( 
+                    null, // Parent component (null means center on screen) 
+                    "Esta seguro que desea volver al menu principal?", // Message to display 
+                    "Volver al menu", // Dialog title 
+                     JOptionPane.YES_NO_CANCEL_OPTION, // Option type (Yes, No, Cancel) 
+                     JOptionPane.QUESTION_MESSAGE, // Message type (question icon) 
+                      null, // Custom icon (null means no custom icon) 
+                     options, // Custom options array 
+                      options[0] // Initial selection (default is "Cancel") 
+                     ); 
+                      if (choice == JOptionPane.YES_NO_OPTION) {  //terminar juego
+                           salirPartida();
+                        } 
+                
             }
         });
         inicializarVista();
