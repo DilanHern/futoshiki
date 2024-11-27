@@ -31,6 +31,9 @@ public class JugadorTop implements Serializable {
         this.segundos = segundos;
     }
     
+    /**
+     * Construcotr de JugadorTop sin parametros
+     */
     public JugadorTop(){
         nombre = "";
         horas = 0;
