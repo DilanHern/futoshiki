@@ -63,6 +63,9 @@ public class Top10 implements Serializable {
         this.jugador10 = jugador10;
     }
     
+    /**
+     * Constructor del top10 sin parámetros
+     */
     public Top10(){
         jugador1 = new JugadorTop();
         jugador2 = new JugadorTop();
@@ -301,6 +304,10 @@ public class Top10 implements Serializable {
         return null;
     }
     
+    /**
+     * Crea una lista del top10 de jugadores vacia
+     * @return una lista de top 10 vacia
+     */
     public static ArrayList<ArrayList<Top10>> crearTop10Vacio(){
         ArrayList<ArrayList<Top10>> resultado = new ArrayList<>();
         

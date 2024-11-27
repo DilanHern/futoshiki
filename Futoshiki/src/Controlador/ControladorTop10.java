@@ -17,7 +17,10 @@ import javax.swing.SpinnerListModel;
 public class ControladorTop10 {
     private MenuTop10 vistaTop;
     
-    
+    /**
+     * Esta funcion permite refrescar los valores de la tabla del top 10
+     * @param top10Cargado 
+     */
     public void refrescarTop(ArrayList<ArrayList<Top10>> top10Cargado){
         switch(vistaTop.ComboDificultad.getSelectedIndex()){
             case 0 -> { //facil
@@ -590,6 +593,12 @@ public class ControladorTop10 {
         }
     }
 
+    /**
+     * Método constructor del controlador del Top 10, controla la logica del top 10
+     * @param vistaPrincipal
+     * @param vistaTop
+     * @param top10Cargado 
+     */
     public ControladorTop10(MenuPrincipal vistaPrincipal, MenuTop10 vistaTop, ArrayList<ArrayList<Top10>> top10Cargado){
         this.vistaTop = vistaTop;
         
