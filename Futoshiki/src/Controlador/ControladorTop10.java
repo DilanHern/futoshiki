@@ -604,7 +604,7 @@ public class ControladorTop10 {
         
         //cargar top
         
-        refrescarTop(top10Cargado);
+        refrescarTop(Top10.cargarTop10("futoshiki2024top10.txt"));
         
         this.vistaTop.btnSalir.addActionListener(
             new ActionListener(){

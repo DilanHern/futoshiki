@@ -322,4 +322,200 @@ public class Top10 implements Serializable {
         return resultado;
     }
     
+    /**
+     * Este metodo se encarga de comparar el tiempo de un jugador con el tiempo dado 
+     * @param jugador jugador con el que se comparara el tiempo
+     * @param horas horas a comparar
+     * @param minutos minutos a comparar
+     * @param segundos segundos a comparar
+     * @return booleano: true si el tiempo supera al del jugador, false si no lo supera
+     */
+    public static boolean esMejorTiempo(JugadorTop jugador, int horas, int minutos, int segundos){
+        //verificar tiempo con el jugador
+        if (jugador.getHoras() >  horas ){
+            return true; //supero al jugador
+        } 
+        
+        else if (jugador.getHoras() == horas){ //pasa a comparar los minutos
+            if (jugador.getMinutos() > minutos){ 
+               return true; //supero al jugador
+            }
+           
+            else if (jugador.getMinutos() == minutos){ //pasa a comparar los segundos
+                if (jugador.getSegundos() > segundos){
+                    return true; //supero al jugador
+                }
+                
+                else if (jugador.getSegundos() == segundos) {
+                    return false; //igualo al jugador
+                }
+            }
+        }
+        return false; //no supero al jugador
+    }
+    
+    /**
+     * Este método se encarga de colocar en la posición dada al jugador dado, en el top dado
+     * @param top10 top en el que se colocará al jugador
+     * @param jugador jugador a colocar en el top
+     * @param posicion posicion en el top a mover al jugador
+     */
+    public static void correrJugadores(Top10 top10, JugadorTop jugador, int posicion){
+        switch(posicion){
+            case 1 -> { //poner a jugador en top1
+                top10.setJugador10(top10.getJugador9());
+                top10.setJugador9(top10.getJugador8());
+                top10.setJugador8(top10.getJugador7());
+                top10.setJugador7(top10.getJugador6());
+                top10.setJugador6(top10.getJugador5());
+                top10.setJugador5(top10.getJugador4());
+                top10.setJugador4(top10.getJugador3());
+                top10.setJugador3(top10.getJugador2());
+                top10.setJugador2(top10.getJugador1());
+                top10.setJugador1(jugador);
+            }
+            case 2 -> { //ponerlo en top2
+                top10.setJugador10(top10.getJugador9());
+                top10.setJugador9(top10.getJugador8());
+                top10.setJugador8(top10.getJugador7());
+                top10.setJugador7(top10.getJugador6());
+                top10.setJugador6(top10.getJugador5());
+                top10.setJugador5(top10.getJugador4());
+                top10.setJugador4(top10.getJugador3());
+                top10.setJugador3(top10.getJugador2());
+                top10.setJugador2(jugador);
+            }
+            case 3 -> { //top3
+                top10.setJugador10(top10.getJugador9());
+                top10.setJugador9(top10.getJugador8());
+                top10.setJugador8(top10.getJugador7());
+                top10.setJugador7(top10.getJugador6());
+                top10.setJugador6(top10.getJugador5());
+                top10.setJugador5(top10.getJugador4());
+                top10.setJugador4(top10.getJugador3());
+                top10.setJugador3(jugador);
+            }
+            case 4 -> { //top4
+                top10.setJugador10(top10.getJugador9());
+                top10.setJugador9(top10.getJugador8());
+                top10.setJugador8(top10.getJugador7());
+                top10.setJugador7(top10.getJugador6());
+                top10.setJugador6(top10.getJugador5());
+                top10.setJugador5(top10.getJugador4());
+                top10.setJugador4(jugador);
+            }
+            case 5 -> { //top5
+                top10.setJugador10(top10.getJugador9());
+                top10.setJugador9(top10.getJugador8());
+                top10.setJugador8(top10.getJugador7());
+                top10.setJugador7(top10.getJugador6());
+                top10.setJugador6(top10.getJugador5());
+                top10.setJugador5(jugador);
+            }
+            case 6 -> { //top6
+                top10.setJugador10(top10.getJugador9());
+                top10.setJugador9(top10.getJugador8());
+                top10.setJugador8(top10.getJugador7());
+                top10.setJugador7(top10.getJugador6());
+                top10.setJugador6(jugador);
+            }
+            case 7 -> { //top7 
+                top10.setJugador10(top10.getJugador9());
+                top10.setJugador9(top10.getJugador8());
+                top10.setJugador8(top10.getJugador7());
+                top10.setJugador7(jugador);
+            }
+            case 8 -> { //top8
+                top10.setJugador10(top10.getJugador9());
+                top10.setJugador9(top10.getJugador8());
+                top10.setJugador8(jugador);
+            }
+            case 9 -> { //top9
+                top10.setJugador10(top10.getJugador9());
+                top10.setJugador9(jugador);
+            }
+            case 10 -> { //top10
+                top10.setJugador10(jugador);
+            }
+            default ->{}
+        }
+    }
+     
+    /**
+     * Este método se encarga de agregar al top10 al jugador que haya terminado el juego
+     * @param top10 top10 a verificar
+     * @param configuracion configuracion con los datos del top a verificar
+     * @param horas horas hechas por el jugador
+     * @param minutos minutos hechos por el jugador
+     * @param segundos segundos hechos por el jugador
+     * @param nombre nombre del jugador
+     * @return booleano: true si el jugador fue agregado, false si no
+     */
+    public static boolean agregarTop10(ArrayList<ArrayList<Top10>> top10, Configuracion configuracion, int horas, int minutos, int segundos, String nombre){
+        int dificultad = configuracion.getDificultad() - 1;
+        int cuadricula = configuracion.getTamañoCuadricula() - 3;
+        Top10 top10AUsar = top10.get(dificultad).get(cuadricula);
+        
+        if(!Top10.esMejorTiempo(top10AUsar.getJugador10(), horas, minutos, segundos)){ //no supero al jugador 10, mantiene el top
+            return false;
+        }
+        //supero al jugador 10
+        JugadorTop jugador = new JugadorTop(nombre, horas, minutos, segundos);
+        if (!Top10.esMejorTiempo(top10AUsar.getJugador9(), horas, minutos, segundos)){ //no supero al jugador 9
+            Top10.correrJugadores(top10.get(dificultad).get(cuadricula), jugador, 10);
+            return true;
+        }
+        
+        //supero al jugador 9
+        if (!Top10.esMejorTiempo(top10AUsar.getJugador8(), horas, minutos, segundos)){ //no supero al jugador 8
+            Top10.correrJugadores(top10.get(dificultad).get(cuadricula), jugador, 9);
+            return true;
+        }
+        
+        //supero al jugador 8
+        if (!Top10.esMejorTiempo(top10AUsar.getJugador7(), horas, minutos, segundos)) { //no supero al jugador 7
+            Top10.correrJugadores(top10.get(dificultad).get(cuadricula), jugador, 8);
+            return true;
+        }
+        
+        //supero al jugador 7
+        if (!Top10.esMejorTiempo(top10AUsar.getJugador6(), horas, minutos, segundos)) { //no supero al jugador 6
+            Top10.correrJugadores(top10.get(dificultad).get(cuadricula), jugador, 7);
+            return true;
+        }
+        
+        //supero al top 6
+        if (!Top10.esMejorTiempo(top10AUsar.getJugador5(), horas, minutos, segundos)) { //no supero al jugador 5
+            Top10.correrJugadores(top10.get(dificultad).get(cuadricula), jugador, 6);
+            return true;
+        }
+
+        //supero al top 5
+        if (!Top10.esMejorTiempo(top10AUsar.getJugador4(), horas, minutos, segundos)) { //no supero al jugador 4
+            Top10.correrJugadores(top10.get(dificultad).get(cuadricula), jugador, 5);
+            return true;
+        }
+
+        //supero al top 4
+        if (!Top10.esMejorTiempo(top10AUsar.getJugador3(), horas, minutos, segundos)) { //no supero al jugador 3
+            Top10.correrJugadores(top10.get(dificultad).get(cuadricula), jugador, 4);
+            return true;
+        }
+
+        //supero al top 3
+        if (!Top10.esMejorTiempo(top10AUsar.getJugador2(), horas, minutos, segundos)) { //no supero al jugador 2
+            Top10.correrJugadores(top10.get(dificultad).get(cuadricula), jugador, 3);
+            return true;
+        }
+
+        //supero al top 2
+        if (!Top10.esMejorTiempo(top10AUsar.getJugador1(), horas, minutos, segundos)) { //no supero al jugador 1
+            Top10.correrJugadores(top10.get(dificultad).get(cuadricula), jugador, 2);
+            return true;
+        }
+
+        //Supera al jugador 1
+        Top10.correrJugadores(top10.get(dificultad).get(cuadricula), jugador, 1);
+        return true;
+    }
 }

@@ -36,7 +36,7 @@ public class JugadorTop implements Serializable {
      */
     public JugadorTop(){
         nombre = "";
-        horas = 0;
+        horas = 100;
         minutos = 0;
         segundos = 0;
     }

@@ -22,6 +22,7 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
@@ -37,6 +38,7 @@ public class ControladorJugar {
     private Jugar vista; //vista del juego
     private Juego juego; //contiene las partidas que se estan jugando
     private Configuracion configuracion; //contienen la configuracion establecida por el usuario
+    private ArrayList<ArrayList<Top10>> top10;
     private JPanel panelDigitos = null; //contiene el panel del lado que esta en la configuracion
     private BotonRedondo digitoPresionado; //almacena el boton digito que fue presionado
     private List<String> jugadasEliminadas = new ArrayList<String>(); //Almancena las jugadas en caso de que se quiera rehacer y estas fueron borradas
@@ -470,6 +472,14 @@ public class ControladorJugar {
                                 
                                 boolean gane = juego.getPartidaActual().validarGane();
                                 if(gane){
+                                    if (Top10.agregarTop10(top10, configuracion, Integer.parseInt(vista.txtHoras.getText()), Integer.parseInt(vista.txtMinutos.getText()), Integer.parseInt(vista.txtSegundos.getText()), configuracion.getNombreJugador())){ //verifica si se puede agregar al top10
+                                        try{
+                                            Top10.guardarTop("futoshiki2024top10.txt", top10);
+                                        }
+                                        catch(IOException ex){
+                                            JOptionPane.showMessageDialog(f,"Hubo un error guardando el top10 ");
+                                        }
+                                    }    
                                     JOptionPane.showMessageDialog(f,"Felicidades ha ganado la partida "); 
                                     //actualiza la partida actual para ponerla en true e indicar que ya finalizado
                                     juego.getPartidaActual().setHaFinalizado(true);
@@ -639,8 +649,11 @@ public class ControladorJugar {
         @param vista representa la vista que manipula el controlador
         @param juego representa la configuracion y partidas establecida por el usuario en la seccion de configuracion
         @param vistaConf representa las vista de configuracion, es utilizada para ser enviada por parametro
+     * @param vistaTop representa la vista del top
+     * @param top10 es la lista de los top10
      */
-    public ControladorJugar(Jugar vista, Juego juego, MenuConfiguracion vistaConf, MenuTop10 vistaTop){
+    public ControladorJugar(Jugar vista, Juego juego, MenuConfiguracion vistaConf, MenuTop10 vistaTop, ArrayList<ArrayList<Top10>> top10){
+        this.top10 = top10;
         this.vista = vista;
         this.configuracion = juego.getConfiguracion();
         this.juego=juego;
@@ -654,7 +667,7 @@ public class ControladorJugar {
             public void actionPerformed(ActionEvent e){
                     
                 MenuPrincipal vistaMenu = new MenuPrincipal();
-                ControladorMenu controladorMenu = new ControladorMenu(vistaMenu,vistaConf, vistaTop, juego.getConfiguracion(), juego);
+                ControladorMenu controladorMenu = new ControladorMenu(vistaMenu,vistaConf, vistaTop, juego.getConfiguracion(), juego, top10);
                 //Muestra el menu
                 vistaMenu.setVisible(true);
                 //Quita la visibilidad de la ventana actual

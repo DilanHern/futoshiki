@@ -52,7 +52,7 @@ public class Futoshiki {
         MenuTop10 vistaTop = new MenuTop10();
         
         //creacion de controladores
-        ControladorMenu menu = new ControladorMenu(vistaMenu, vistaConfig, vistaTop, configuracionCargada, juego);
+        ControladorMenu menu = new ControladorMenu(vistaMenu, vistaConfig, vistaTop, configuracionCargada, juego, top10Cargado);
         ControladorConfiguracion controladorConfig = new ControladorConfiguracion(vistaMenu, vistaConfig, configuracionCargada, juego);
         ControladorTop10 controladorTop = new ControladorTop10(vistaMenu, vistaTop, top10Cargado);
         vistaMenu.setVisible(true);

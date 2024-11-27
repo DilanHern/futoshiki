@@ -6,6 +6,7 @@ import Modelo.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 
 public class ControladorMenu {
@@ -18,9 +19,10 @@ public class ControladorMenu {
      * @param vistaTop representa la vista del menu del Top 10
      * @param configuracionCargada es la configuracion actual del juego
      * @param juego representa el juego
+     * @param top10Cargado todos los top10 acutales
      * 
      */
-    public ControladorMenu(MenuPrincipal vista, MenuConfiguracion vistaConfig, MenuTop10 vistaTop, Configuracion configuracionCargada, Juego juego){
+    public ControladorMenu(MenuPrincipal vista, MenuConfiguracion vistaConfig, MenuTop10 vistaTop, Configuracion configuracionCargada, Juego juego, ArrayList<ArrayList<Top10>> top10Cargado){
         this.vista = vista;
         
         
@@ -35,7 +37,7 @@ public class ControladorMenu {
                     Jugar jugar = new Jugar();
                     jugar.setVisible(true);
                     vista.setVisible(false);
-                    ControladorJugar controladorjugar = new ControladorJugar(jugar, juego,vistaConfig, vistaTop);
+                    ControladorJugar controladorjugar = new ControladorJugar(jugar, juego,vistaConfig, vistaTop, top10Cargado);
                 }
             }
         );
