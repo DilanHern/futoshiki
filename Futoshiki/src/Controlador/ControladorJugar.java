@@ -400,6 +400,13 @@ public class ControladorJugar {
         }
     }
     
+    private void borrarJuego(){
+        //mientras hayan jugadas en la lista
+        while (!jugadasRealizadas.isEmpty()){
+            borrarJugada();
+        }
+    }
+    
         /**
      * Obtiene la ultima jugada y la elimina anadiendola a las jugadas borradas para que sea restaurada si se desea
      */
@@ -740,6 +747,24 @@ public class ControladorJugar {
                 vista.panelBotones.setVisible(true);
                 
                
+            }
+        });
+        
+        this.vista.btnBorrarJuego.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                //valida que haya jugadas hechas que pueda borrar, de no ser asi le va a indicar
+               if(jugadasRealizadas.isEmpty()){
+               
+                   JFrame f=new JFrame();  
+                   JOptionPane.showMessageDialog(f,"REALICE UNA JUGADA"); 
+               }
+               else{
+                   int response = JOptionPane.showConfirmDialog(null, "¿Desea borrar el juego?", "Confirmación", JOptionPane.YES_NO_OPTION);
+                    if (response == JOptionPane.YES_OPTION) {
+                        borrarJuego(); //permite borrar la ultima jugada que se hizo
+                    }
+               }
             }
         });
         

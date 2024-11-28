@@ -101,7 +101,7 @@ public class ControladorMenu {
                     // Crea el objeto File con la ruta completa
                     File archivoPDF = new File(directorioActual, nombreArchivo);
 
-                    // Verifica si Desktop es soportado en el sistema
+                    // Verifica si Desktop es soportado en el sistema (windows si lo soporta)
                     if (Desktop.isDesktopSupported()) {
                         Desktop desktop = Desktop.getDesktop();
                         if (archivoPDF.exists()) {
