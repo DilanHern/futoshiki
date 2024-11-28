@@ -624,7 +624,6 @@ public class ControladorJugar implements Serializable {
         int nivel = 0;
         //valida que no sea multinivel, de serlo define el nivel de la partida a jugar
         if(configuracion.getMultinivel()){
-            
             if(juego.getPartidaActual() == null){
                 nivel = 1;
             }
