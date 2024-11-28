@@ -1,16 +1,5 @@
 <partidasFutoshiki>
-    <!-- 3X3 -->
     <!-- 3x3 - Nivel Facil -->
-    <partida>
-        <nivel>Facil</nivel>
-        <cuadricula>3</cuadricula>
-        <des>maf,0,1</des>
-        <des>mef,1,2</des>
-        <des>mac,2,1</des>
-        <cons>1,0,0</cons>
-        <cons>3,2,2</cons>
-    </partida>
-
     <partida>
         <nivel>Facil</nivel>
         <cuadricula>3</cuadricula>
@@ -28,7 +17,6 @@
         <des>maf,2,1</des>
         <des>mef,0,2</des>
         <cons>2,1,1</cons>
-        <cons>3,2,2</cons>
     </partida>
 
     <!-- 3x3 - Nivel Dificil -->
