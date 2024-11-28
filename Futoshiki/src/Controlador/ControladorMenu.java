@@ -7,7 +7,9 @@ import Modelo.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 
 public class ControladorMenu {
     
@@ -87,8 +89,31 @@ public class ControladorMenu {
         this.vista.btnAyuda.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                vista.setVisible(false);
-                System.exit(0); //termina la ejecucion
+                try {
+                    // Nombre del archivo PDF
+                    String nombreArchivo = "Manual_de_usuario.pdf";
+
+                    // Obtiene el directorio de trabajo actual (del proyecto Futoshiki)
+                    String directorioActual = System.getProperty("user.dir");
+                    System.out.println(directorioActual);
+
+                    // Crea el objeto File con la ruta completa
+                    File archivoPDF = new File(directorioActual, nombreArchivo);
+
+                    // Verifica si Desktop es soportado en el sistema
+                    if (Desktop.isDesktopSupported()) {
+                        Desktop desktop = Desktop.getDesktop();
+                        if (archivoPDF.exists()) {
+                            desktop.open(archivoPDF);
+                        } else {
+                            System.out.println("El archivo no existe en el directorio actual.");
+                        }
+                    } else {
+                        System.out.println("Desktop no es soportado en este sistema.");
+                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         
