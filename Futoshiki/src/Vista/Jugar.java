@@ -51,9 +51,10 @@ public class Jugar extends javax.swing.JFrame {
         btnRehacerJugada = new Componentes.BotonRedondo();
         btnCargarJuego = new Componentes.BotonRedondo();
         btnGuardarJuego = new Componentes.BotonRedondo();
-        btnJugar = new Componentes.BotonRedondo();
         btnTerminarJuego = new Componentes.BotonRedondo();
+        btnJugar = new Componentes.BotonRedondo();
         labelBorrador = new javax.swing.JLabel();
+        btnVolverMenu = new Componentes.BotonRedondo();
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -316,6 +317,17 @@ public class Jugar extends javax.swing.JFrame {
             }
         });
 
+        btnTerminarJuego.setBackground(new java.awt.Color(0, 51, 102));
+        btnTerminarJuego.setText("Terminar Juego");
+        btnTerminarJuego.setColor1(new java.awt.Color(0, 51, 102));
+        btnTerminarJuego.setColor2(new java.awt.Color(0, 51, 102));
+        btnTerminarJuego.setColor3(new java.awt.Color(0, 51, 102));
+        btnTerminarJuego.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTerminarJuegoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelBotonesLayout = new javax.swing.GroupLayout(panelBotones);
         panelBotones.setLayout(panelBotonesLayout);
         panelBotonesLayout.setHorizontalGroup(
@@ -329,6 +341,10 @@ public class Jugar extends javax.swing.JFrame {
                     .addComponent(btnBorrarJuego, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnBorrarJugada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelBotonesLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(btnTerminarJuego, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelBotonesLayout.setVerticalGroup(
             panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -343,7 +359,8 @@ public class Jugar extends javax.swing.JFrame {
                 .addComponent(btnCargarJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnGuardarJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addComponent(btnTerminarJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         btnJugar.setBackground(new java.awt.Color(255, 153, 0));
@@ -357,18 +374,18 @@ public class Jugar extends javax.swing.JFrame {
             }
         });
 
-        btnTerminarJuego.setBackground(new java.awt.Color(0, 51, 102));
-        btnTerminarJuego.setText("Terminar Juego");
-        btnTerminarJuego.setColor1(new java.awt.Color(0, 51, 102));
-        btnTerminarJuego.setColor2(new java.awt.Color(0, 51, 102));
-        btnTerminarJuego.setColor3(new java.awt.Color(0, 51, 102));
-        btnTerminarJuego.addActionListener(new java.awt.event.ActionListener() {
+        labelBorrador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/borrarJugada.png"))); // NOI18N
+
+        btnVolverMenu.setBackground(new java.awt.Color(255, 153, 153));
+        btnVolverMenu.setText("Volver al menu principal");
+        btnVolverMenu.setColor1(new java.awt.Color(255, 153, 153));
+        btnVolverMenu.setColor2(new java.awt.Color(255, 153, 153));
+        btnVolverMenu.setColor3(new java.awt.Color(255, 153, 153));
+        btnVolverMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTerminarJuegoActionPerformed(evt);
+                btnVolverMenuActionPerformed(evt);
             }
         });
-
-        labelBorrador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/borrarJugada.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -381,21 +398,20 @@ public class Jugar extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblNivel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblNombreJugador, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(panelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGap(32, 32, 32)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btnTerminarJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(panelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(panelTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(48, 48, 48)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnVolverMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 368, Short.MAX_VALUE)
                 .addComponent(pnlDigitosIzq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -422,11 +438,11 @@ public class Jugar extends javax.swing.JFrame {
                                 .addComponent(lblNivel)
                                 .addGap(30, 30, 30)
                                 .addComponent(panelTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(16, 16, 16)
                                 .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(22, 22, 22)
-                                .addComponent(btnTerminarJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(2, 2, 2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnVolverMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(panelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(pnlDigitosIzq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -437,7 +453,7 @@ public class Jugar extends javax.swing.JFrame {
                                 .addGap(49, 49, 49)
                                 .addComponent(pnlDigitosDer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(PanelCuadriculas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -488,6 +504,10 @@ public class Jugar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBorrarJugadaActionPerformed
 
+    private void btnVolverMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverMenuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVolverMenuActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -533,6 +553,7 @@ public class Jugar extends javax.swing.JFrame {
     public Componentes.BotonRedondo btnJugar;
     public Componentes.BotonRedondo btnRehacerJugada;
     public Componentes.BotonRedondo btnTerminarJuego;
+    public Componentes.BotonRedondo btnVolverMenu;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JDesktopPane jDesktopPane3;

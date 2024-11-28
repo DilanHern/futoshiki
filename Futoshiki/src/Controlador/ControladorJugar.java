@@ -35,6 +35,8 @@ import javax.swing.Timer;
 
 public class ControladorJugar {
     
+    private MenuTop10 vistaTop;
+    private MenuConfiguracion vistaConf;
     private Jugar vista; //vista del juego
     private Juego juego; //contiene las partidas que se estan jugando
     private Configuracion configuracion; //contienen la configuracion establecida por el usuario
@@ -129,7 +131,7 @@ public class ControladorJugar {
                 
             } 
             else if (choice == JOptionPane.NO_OPTION) { 
-                vista.btnTerminarJuego.doClick();
+                salirPartida();
             } 
         }
     }
@@ -166,6 +168,22 @@ public class ControladorJugar {
         vista.txtSegundos.setText(String.valueOf(segundos));
     }
     
+    /**
+     */
+    private void salirPartida(){
+    
+        MenuPrincipal vistaMenu = new MenuPrincipal();
+        ControladorMenu controladorMenu = new ControladorMenu(vistaMenu,vistaConf, vistaTop, juego.getConfiguracion(), juego, top10);
+        juego.getPartidaActual().setHaFinalizado(false);
+         //Muestra el menu
+        vistaMenu.setVisible(true);
+        //Quita la visibilidad de la ventana actual
+        vista.setVisible(false);
+        if(reloj!=null && reloj.isRunning()){
+                    reloj.stop(); //para el temporizador en caso de que se este ejecutando
+                    juego.getPartidaActual().limpiarCuadricula();
+         }
+    }
     
     /**
      * Genera la cantidad de digitos en el panel de digitos indicado en relacion al tamano de la configuracion
@@ -489,6 +507,10 @@ public class ControladorJugar {
                                         vista.PanelInterno.removeAll();
                                         inicializarVista();
                                     }
+                                    else{
+                                        //al ser un solo jugador sale de la ventana y vuele al menu
+                                        salirPartida();
+                                    }
                                 }else{//almacena la jugada que fue realizada en la pila de las jugadas realizadas
                                     String filaS= String.valueOf(fila);
                                     String columnaS= String.valueOf(columna);
@@ -594,7 +616,7 @@ public class ControladorJugar {
         int nivel = 0;
         //valida que no sea multinivel, de serlo define el nivel de la partida a jugar
         if(configuracion.getMultinivel()){
-        
+            
             if(juego.getPartidaActual() == null){
                 nivel = 1;
             }
@@ -626,7 +648,7 @@ public class ControladorJugar {
         if(partidaRespuesta==null){
               JFrame f=new JFrame();  
               JOptionPane.showMessageDialog(f,"NO HAY PARTIDAS DISPONIBLES PARA " + dificultad); 
-              vista.btnTerminarJuego.doClick();
+              salirPartida();
         }else{
             partida = new Partida(partidaRespuesta);
             juego.setPartidaActual(partida);
@@ -657,7 +679,8 @@ public class ControladorJugar {
         this.vista = vista;
         this.configuracion = juego.getConfiguracion();
         this.juego=juego;
-        
+        this.vistaTop= vistaTop;
+        this.vistaConf=vistaConf;
         
         
         //Anade el evento al boton TerminarJuego, genera la vista del menu  con su respectivo controlador modifica la visibilidad de las vistas
@@ -666,16 +689,32 @@ public class ControladorJugar {
          @Override
             public void actionPerformed(ActionEvent e){
                     
-                MenuPrincipal vistaMenu = new MenuPrincipal();
-                ControladorMenu controladorMenu = new ControladorMenu(vistaMenu,vistaConf, vistaTop, juego.getConfiguracion(), juego, top10);
-                //Muestra el menu
-                vistaMenu.setVisible(true);
-                //Quita la visibilidad de la ventana actual
-                vista.setVisible(false);
-                if(reloj!=null && reloj.isRunning()){
-                    reloj.stop(); //para el temporizador en caso de que se este ejecutando
-                    juego.getPartidaActual().limpiarCuadricula();
-                }
+                   Object[] options = { "Terminar Juego", "Seguir jugando" }; 
+                    int choice = JOptionPane.showOptionDialog( 
+                    null, // Parent component (null means center on screen) 
+                    "Esta seguro que quiere terminar el juego?", // Message to display 
+                    "Terminar Juego", // Dialog title 
+                    JOptionPane.YES_NO_CANCEL_OPTION, // Option type (Yes, No, Cancel) 
+                    JOptionPane.QUESTION_MESSAGE, // Message type (question icon) 
+                    null, // Custom icon (null means no custom icon) 
+                    options, // Custom options array 
+                    options[0] // Initial selection (default is "Cancel") 
+                     ); 
+
+                    if (choice == JOptionPane.YES_NO_OPTION) {  //terminar juego
+                        
+                            if(configuracion.getMultinivel()){
+                                    vista.PanelInterno.removeAll();
+                                    inicializarVista();
+                           }
+                            else{
+                                vista.PanelInterno.removeAll();
+                                inicializarVista();
+                                segundos=0;
+                                minutos=0;
+                                horas=0;
+                            }
+                    } 
             }
         
         });
@@ -745,6 +784,28 @@ public class ControladorJugar {
                   borrador=false;
               else
                   borrador=true;
+                
+            }
+        });
+        this.vista.btnVolverMenu.addMouseListener(new MouseAdapter(){
+        
+         @Override
+            public void mouseClicked(MouseEvent e){
+              
+                    Object[] options = { "Volver al menu principal", "Seguir jugando" }; 
+                    int choice = JOptionPane.showOptionDialog( 
+                    null, // Parent component (null means center on screen) 
+                    "Esta seguro que desea volver al menu principal?", // Message to display 
+                    "Volver al menu", // Dialog title 
+                     JOptionPane.YES_NO_CANCEL_OPTION, // Option type (Yes, No, Cancel) 
+                     JOptionPane.QUESTION_MESSAGE, // Message type (question icon) 
+                      null, // Custom icon (null means no custom icon) 
+                     options, // Custom options array 
+                      options[0] // Initial selection (default is "Cancel") 
+                     ); 
+                      if (choice == JOptionPane.YES_NO_OPTION) {  //terminar juego
+                           salirPartida();
+                        } 
                 
             }
         });
