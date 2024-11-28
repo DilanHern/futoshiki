@@ -40,7 +40,7 @@ public class ControladorMenu {
                     Jugar jugar = new Jugar();
                     jugar.setVisible(true);
                     vista.setVisible(false);
-                    
+                    juego.restablecerPartidaActual(null);
                     ControladorJugar controladorjugar = new ControladorJugar(jugar, juego,vistaConfig, vistaTop, top10Cargado);
                 }
             }

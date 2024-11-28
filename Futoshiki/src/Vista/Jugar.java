@@ -361,6 +361,8 @@ public class Jugar extends javax.swing.JFrame implements Serializable{
             }
         });
 
+        labelBorrador.setBackground(new java.awt.Color(0, 255, 0));
+        labelBorrador.setForeground(new java.awt.Color(153, 255, 153));
         labelBorrador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/borrarJugada.png"))); // NOI18N
 
         btnVolverMenu.setBackground(new java.awt.Color(255, 153, 153));
@@ -422,8 +424,8 @@ public class Jugar extends javax.swing.JFrame implements Serializable{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlDigitosDer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelBorrador))
-                .addContainerGap(384, Short.MAX_VALUE))
+                    .addComponent(labelBorrador, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(370, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -455,8 +457,8 @@ public class Jugar extends javax.swing.JFrame implements Serializable{
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(labelBorrador)
-                        .addGap(49, 49, 49)
+                        .addComponent(labelBorrador, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
                         .addComponent(pnlDigitosDer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(PanelCuadriculas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(389, Short.MAX_VALUE))

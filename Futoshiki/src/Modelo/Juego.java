@@ -4,7 +4,10 @@ package Modelo;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.Serializable;
+import static java.lang.Math.random;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -57,6 +60,15 @@ public class Juego implements Serializable{
         partidaActual.setConstantes(partida.getConstantes());
         partidaActual.setCuadricula(partida.getCuadricula());
     }
+    
+        /**
+     * realiza una copia de la partida para que no se modifique
+     * @param partida the partidaActual to set
+     */
+    public void restablecerPartidaActual(Partida partida) {
+        partidaActual = partida;
+    }
+    
     
     
     /**
@@ -219,7 +231,8 @@ public class Juego implements Serializable{
      * @param repetir define si ya se usaron todas la partidas que fueron guardadas por lo que se deben repetir
      */
     private Partida buscarPartida(int tamano, int dificultad, boolean repetir){
-    
+        Random random = new Random();
+        List<Partida> partidasEncontradas = new ArrayList<Partida>();
        //recorre y busca un partida con la que se pueda jugar
         for(Partida partida : partidas){
             if(partida.getTamano() == tamano){
@@ -229,16 +242,21 @@ public class Juego implements Serializable{
                     //valida que no se haya jugado la partida
                     if(!partida.getHaFinalizado()){
                         partida.setHaFinalizado(true); //se asigna a la partida true para indicar que se va a utilizar y ya no se usa mas a excepcion de que se ocupe repetir
-                        return partida;
+                        partidasEncontradas.add(partida);
                     }
                     else if(repetir){ //valida si se puede repetir partidas
-                        return partida;
+                        if(partida!=partidaActual)
+                        partidasEncontradas.add(partida);
                     }
                 }
             }
         }
-        //no se encontro una partida listas
-        return null;
+        
+        //escoge una de forma aleatoria para evitar repetido
+        if(!partidasEncontradas.isEmpty())
+            return partidasEncontradas.get(random.nextInt(partidasEncontradas.size()));
+        else
+            return null; //no hubo partidas
     }
     
     /**
@@ -254,7 +272,6 @@ public class Juego implements Serializable{
         if(partida==null){
             partida = buscarPartida(tamano, dificultad,true);
         }
-        
         return partida;
     }
 

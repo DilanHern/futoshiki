@@ -65,6 +65,9 @@ public class Partida implements Serializable{
         
         haFinalizado=false;
     }
+
+    public Partida() {
+    }
     
     /**
      * @return the cuadricula

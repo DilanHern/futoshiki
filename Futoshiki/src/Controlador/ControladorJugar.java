@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,6 +34,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
+import javax.swing.border.Border;
+
 
 public class ControladorJugar implements Serializable {
     private static final long serialVersionUID = 3L;
@@ -53,6 +56,40 @@ public class ControladorJugar implements Serializable {
     private int minutos=0; //controla los minutos que han concurrido
     private int segundos=0; //controla los segundos que han concurrido
     private int tipo; //tipo de reloj que es utilizado en la ejecucion
+    //----------------TIMER PARA LAS PARTIDAS INDIVIDUIALES----------
+    private int horasPartida=0; //controla las horas que han concurrido en la partida unitaria
+    private int minutosPartida=0; //controla los minutos que han concurrido en la partida unitaria
+    private int segundosPartida=0; //controla los segundos que han concurrido en la partida unitaria
+    private Timer temporizadorPartida = new Timer(1000, new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+            //aumenta las variables que mideen el tiempo en la partida
+           segundosPartida++;
+            if(segundosPartida == 61){
+                segundosPartida=0;
+                minutosPartida++;
+            }
+            if(minutosPartida==60){
+                minutosPartida=0;
+                horasPartida++;
+            }
+        }
+    });
+    
+    /**
+     * Reinicia los valores de la partida cada vez que esta es terminada este temporizador se encarga de tomar el tiempo de la partida sin importar si es un solo nivel o multinivel
+     */
+    private void reiniciarRelojPartida(){
+    
+          horasPartida=0; //controla las horas que han concurrido
+          minutosPartida=0; //controla los minutos que han concurrido
+          segundosPartida=0; //controla los segundos que han concurrido
+          temporizadorPartida.stop();
+          temporizadorPartida.restart();
+    
+    }
+    
+    
     /**
      * Ajusta el timer en la vista en relacion a la configuracion, este puede ser ocultado o mostrado asignando su valor correspondiente al tipo de timer
      */
@@ -453,6 +490,7 @@ public class ControladorJugar implements Serializable {
                    if(borrador){ //el borrador se habia seleccionado
                        
                         borradorPresionado(fila,columna,boton);
+                        vista.labelBorrador.setBorder(null);
                         
                    }else{                   
                         JFrame f=new JFrame();  
@@ -498,7 +536,7 @@ public class ControladorJugar implements Serializable {
                                 
                                 boolean gane = juego.getPartidaActual().validarGane();
                                 if(gane){
-                                    if (Top10.agregarTop10(top10, configuracion, Integer.parseInt(vista.txtHoras.getText()), Integer.parseInt(vista.txtMinutos.getText()), Integer.parseInt(vista.txtSegundos.getText()), configuracion.getNombreJugador())){ //verifica si se puede agregar al top10
+                                    if (Top10.agregarTop10(top10, configuracion,horasPartida,minutosPartida,segundosPartida, configuracion.getNombreJugador())){ //verifica si se puede agregar al top10
                                         try{
                                             Top10.guardarTop("futoshiki2024top10.txt", top10);
                                         }
@@ -509,10 +547,13 @@ public class ControladorJugar implements Serializable {
                                     JOptionPane.showMessageDialog(f,"Felicidades ha ganado la partida "); 
                                     //actualiza la partida actual para ponerla en true e indicar que ya finalizado
                                     juego.getPartidaActual().setHaFinalizado(true);
-
+                                    System.out.println(horasPartida + " "+minutosPartida + " "+segundosPartida);
+                                    reiniciarRelojPartida();
                                     //En caso de ser multinivel, debe continuar al siguiente nivel por lo que actualiza
                                     if(configuracion.getMultinivel()){
                                         vista.PanelInterno.removeAll();
+                                        jugadasRealizadas = new ArrayList<String>();
+                                        jugadasEliminadas = new ArrayList<String>();
                                         inicializarVista();
                                     }
                                     else{
@@ -636,7 +677,7 @@ public class ControladorJugar implements Serializable {
                 else
                     nivel = 3;
             }
-        }else{
+        }else{ // en caso de no ser multinivel obtiene el nivel de la configuracion
         
             nivel = configuracion.getDificultad();
         }
@@ -661,13 +702,14 @@ public class ControladorJugar implements Serializable {
             juego.setPartidaActual(partida);
              //Nombre del nivel de la partida
             this.vista.lblNivel.setText(dificultad);
-
+            
             //Nombre del jugador
             if(!configuracion.getNombreJugador().equals(""))
                 this.vista.lblNombreJugador.setText("Jugador " + configuracion.getNombreJugador());
             else
                 this.vista.lblNombreJugador.setText("Jugador Ingcognito");
             generarCuadricula();
+            
             
         }
        
@@ -707,7 +749,6 @@ public class ControladorJugar implements Serializable {
         this.vistaTop= vistaTop;
         this.vistaConf=vistaConf;
         
-        
         //Anade el evento al boton TerminarJuego, genera la vista del menu  con su respectivo controlador modifica la visibilidad de las vistas
         this.vista.btnTerminarJuego.addActionListener(new ActionListener(){
         
@@ -738,6 +779,7 @@ public class ControladorJugar implements Serializable {
                                 segundos=0;
                                 minutos=0;
                                 horas=0;
+                                reiniciarRelojPartida();
                             }
                     } 
             }
@@ -751,6 +793,7 @@ public class ControladorJugar implements Serializable {
             public void actionPerformed(ActionEvent e){
                 tipo=configuracion.getReloj();
                 inicializarTimer();
+                temporizadorPartida.start();
                  if(configuracion.getReloj() == 1)
                     reloj.start();
                 else if(configuracion.getReloj()==2){
@@ -871,13 +914,19 @@ public class ControladorJugar implements Serializable {
         
          @Override
             public void mouseClicked(MouseEvent e){
-              
-              if(borrador)
-                  borrador=false;
-              else
-                  borrador=true;
-                
-            }
+                if(!vista.btnJugar.isVisible()){
+                if(borrador){
+                    vista.labelBorrador.setBorder(null);
+                    borrador=false;
+                }
+                else{
+                    Border border = BorderFactory.createLineBorder(java.awt.Color.BLACK, 2); // Borde negro de grosor 2
+                    vista.labelBorrador.setBorder(border);
+                    borrador=true;
+                }
+
+              }
+         }
         });
         this.vista.btnVolverMenu.addMouseListener(new MouseAdapter(){
         
@@ -897,7 +946,7 @@ public class ControladorJugar implements Serializable {
                      ); 
                       if (choice == JOptionPane.YES_NO_OPTION) {  //terminar juego
                            salirPartida();
-                        } 
+                      } 
             }
         });
         inicializarVista();
