@@ -23,6 +23,7 @@ import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
@@ -33,8 +34,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
-public class ControladorJugar {
-    
+public class ControladorJugar implements Serializable {
+    private static final long serialVersionUID = 3L;
     private MenuTop10 vistaTop;
     private MenuConfiguracion vistaConf;
     private Jugar vista; //vista del juego
@@ -675,6 +676,24 @@ public class ControladorJugar {
     }
     
     /**
+     * Setter de controladorJugar
+     * @param vista
+     * @param juego
+     * @param vistaConf 
+     */
+    public void setControladorJugar(Juego juego, Configuracion configuracion, List<String> jugadasEliminadas, List<String> jugadasRealizadas, Timer reloj, int horas, int minutos, int segundos, int tipo){
+        this.juego = juego;
+        this.configuracion = configuracion;
+        this.jugadasRealizadas = jugadasRealizadas;
+        this.jugadasEliminadas = jugadasEliminadas;
+        this.reloj = reloj;
+        this.horas = horas;
+        this.minutos = minutos;
+        this.segundos = segundos;
+        this.tipo = tipo;
+    }
+    
+    /**
         @param vista representa la vista que manipula el controlador
         @param juego representa la configuracion y partidas establecida por el usuario en la seccion de configuracion
         @param vistaConf representa las vista de configuracion, es utilizada para ser enviada por parametro
@@ -744,9 +763,58 @@ public class ControladorJugar {
                  //en caso de no tener tiempo el reloj no comienza
                 ajustarPanelDigitos();
                 vista.btnJugar.setVisible(false);
+                vista.btnCargarJuego.setVisible(false);
                 vista.panelBotones.setVisible(true);
+            }
+        });
+        
+        this.vista.btnCargarJuego.addActionListener(new ActionListener(){
+         @Override
+            public void actionPerformed(ActionEvent e){
+                JuegoGuardado juegoCargado = JuegoGuardado.cargarJuegoGuardado("futoshiki2024juegoactual.txt");
+                if (juegoCargado == null){
+                    JOptionPane.showMessageDialog(null, "No hay partidas guardadas!");
+                    return;
+                }
+                setControladorJugar(juegoCargado.getJuego(), juegoCargado.getConfiguracion(), juegoCargado.getJugadasEliminadas(), juegoCargado.getJugadasRealizadas(), juegoCargado.getReloj(), juegoCargado.getHoras(),
+                        juegoCargado.getMinutos(), juegoCargado.getSegundos(), juegoCargado.getTipo());
                 
-               
+                if(configuracion.getMultinivel()){
+                        vista.PanelInterno.removeAll();
+                        inicializarVista();
+               }
+                else{
+                    vista.PanelInterno.removeAll();
+                    inicializarVista();
+                    segundos=0;
+                    minutos=0;
+                    horas=0;
+                }
+                vista.btnJugar.doClick();
+                int cuantas = 0;
+                while(!jugadasRealizadas.isEmpty()){
+                    vista.btnBorrarJugada.doClick();
+                    cuantas += 1;
+                }
+                for (int i = 0; i < cuantas; i++){
+                    vista.btnRehacerJugada.doClick();
+                }
+                
+            }
+        });
+        
+        this.vista.btnGuardarJuego.addActionListener(new ActionListener(){
+         @Override
+            public void actionPerformed(ActionEvent e){
+                JuegoGuardado juegoAGuardar = new JuegoGuardado(configuracion, juego, jugadasEliminadas, jugadasRealizadas, reloj, horas, minutos, segundos, tipo); //tambien guardar reloj/timer
+                try {
+                    JuegoGuardado.guardarJuegoGuardado("futoshiki2024juegoactual.txt", juegoAGuardar);
+                    JOptionPane.showMessageDialog(null, "La partida se guardo correctamente!");
+                }
+                catch (IOException ex){
+                    JOptionPane.showMessageDialog(null, "Hubo un error guardando la partida!" + ex.getMessage());
+                    ex.printStackTrace(); // Imprime la traza de la excepción en la consola);
+                }
             }
         });
         
@@ -831,7 +899,6 @@ public class ControladorJugar {
                       if (choice == JOptionPane.YES_NO_OPTION) {  //terminar juego
                            salirPartida();
                         } 
-                
             }
         });
         inicializarVista();

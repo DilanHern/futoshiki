@@ -1,11 +1,13 @@
 package Modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Partida {
+public class Partida implements Serializable{
     
     
     //Atributos
+    private static final long serialVersionUID = 5L;
     private int[][] cuadricula;
     private boolean haFinalizado; //true-> ya fue jugada false-> aun no fue jugada
     private int nivel;

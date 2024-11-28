@@ -36,6 +36,7 @@ public class ControladorMenu {
                 @Override
                 public void actionPerformed(ActionEvent e){
 
+                    configuracionCargada.setConfiguracion(Configuracion.cargarConfiguracion("futoshiki2024configuracion.txt"));
                     Jugar jugar = new Jugar();
                     jugar.setVisible(true);
                     vista.setVisible(false);

@@ -3,6 +3,7 @@ package Modelo;
 
 import java.util.ArrayList;
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
@@ -19,9 +20,10 @@ import org.w3c.dom.NodeList;
 /**
  *
  */
-public class Juego {
+public class Juego implements Serializable{
  
     //atributos
+    private static final long serialVersionUID = 4L;
     private ArrayList<Partida> partidas;
     private Configuracion configuracion;
     private Partida partidaActual;

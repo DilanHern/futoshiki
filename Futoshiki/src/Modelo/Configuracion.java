@@ -84,6 +84,24 @@ public class Configuracion implements Serializable{
     }
     
     /**
+     * Asigna en la configuracion los valores de otra configuracion
+     * @param configuracion 
+     */
+    public void setConfiguracion(Configuracion configuracion){
+        this.tamañoCuadricula = configuracion.tamañoCuadricula;
+        this.dificultad = configuracion.dificultad;
+        this.multinivel = configuracion.multinivel;
+        this.reloj = configuracion.reloj;
+        this.posicionVentana = configuracion.posicionVentana;
+        this.nombreJugador = configuracion.nombreJugador;
+        this.pin = configuracion.pin;
+        this.horas = configuracion.horas;
+        this.minutos = configuracion.minutos;
+        this.segundos = configuracion.segundos;
+        this.jugadoresRegistrados = configuracion.jugadoresRegistrados;
+    }
+    
+    /**
      * @return el hashmap de los jugadores
      */
     public Map<String, ArrayList<String>> getJugadoresRegistrados(){
