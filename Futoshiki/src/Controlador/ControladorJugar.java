@@ -120,9 +120,9 @@ public class ControladorJugar implements Serializable {
      * En caso de cumplir el tiempo reinicia el valor y disminuye el siguiente
      */
     private void ActualizarTemporizador(){
-        if(segundos>0)
+        if(segundos>=0)
             segundos--;
-        if(segundos == 0){
+        if(segundos < 0){
             
             if(minutos>0){
                 segundos=59;
@@ -186,7 +186,7 @@ public class ControladorJugar implements Serializable {
      */
     private void ActualizarCronometro(){
         segundos++;
-        if(segundos == 59){
+        if(segundos == 60){
             segundos=0;
             minutos++;
         }
