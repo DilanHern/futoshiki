@@ -50,6 +50,7 @@ public class ControladorJugar implements Serializable {
     private List<String> jugadasEliminadas = new ArrayList<String>(); //Almancena las jugadas en caso de que se quiera rehacer y estas fueron borradas
     private List<String> jugadasRealizadas = new ArrayList<String>(); //Almancena las jugadas realizadas estas funcionan por si se borra algua
     private boolean borrador = false; //Sera true en caso de ser presionado, y este funciona para poder borrar una celda, por lo que se valida si esta en true
+    private int dificultad;
     //------------------TIMER------------------------
     private Timer reloj;
     private int horas=0; //controla las horas que han concurrido
@@ -128,7 +129,7 @@ public class ControladorJugar implements Serializable {
         if(segundos == 0){
             
             if(minutos>0){
-                segundos=59;
+                segundos=60;
                 minutos--;
             }
         }
@@ -532,8 +533,6 @@ public class ControladorJugar implements Serializable {
                               //reinicio el valor del boton
                                boton.setText("");
                             }else{
-                                
-                                
                                 boolean gane = juego.getPartidaActual().validarGane();
                                 if(gane){
                                     if (Top10.agregarTop10(top10, configuracion,horasPartida,minutosPartida,segundosPartida, configuracion.getNombreJugador())){ //verifica si se puede agregar al top10
@@ -547,19 +546,21 @@ public class ControladorJugar implements Serializable {
                                     JOptionPane.showMessageDialog(f,"Felicidades ha ganado la partida "); 
                                     //actualiza la partida actual para ponerla en true e indicar que ya finalizado
                                     juego.getPartidaActual().setHaFinalizado(true);
-                                    System.out.println(horasPartida + " "+minutosPartida + " "+segundosPartida);
+                                    System.out.println(horasPartida + " "+minutosPartida + " "+segundosPartida+"jj");
                                     reiniciarRelojPartida();
+                                    System.out.println(horasPartida + " "+minutosPartida + " "+segundosPartida+"jj");
                                     //En caso de ser multinivel, debe continuar al siguiente nivel por lo que actualiza
                                     if(configuracion.getMultinivel()){
                                         vista.PanelInterno.removeAll();
                                         jugadasRealizadas = new ArrayList<String>();
                                         jugadasEliminadas = new ArrayList<String>();
-                                        inicializarVista();
                                         temporizadorPartida.start();
+                                        inicializarVista();
                                     }
                                     else{
                                         jugadasRealizadas = new ArrayList<String>();
                                         jugadasEliminadas = new ArrayList<String>();
+                                        temporizadorPartida.stop();
                                         //al ser un solo jugador sale de la ventana y vuele al menu
                                         salirPartida();
                                     }
@@ -681,10 +682,11 @@ public class ControladorJugar implements Serializable {
                     nivel = 3;
             }
         }else{ // en caso de no ser multinivel obtiene el nivel de la configuracion
-        
             nivel = configuracion.getDificultad();
         }
         
+        //la globalizo
+        this.dificultad=nivel;
         //Nivel en palabras
         switch (nivel) {
             case 1 -> dificultad+="Facil";
@@ -775,14 +777,19 @@ public class ControladorJugar implements Serializable {
                             if(configuracion.getMultinivel()){
                                     vista.PanelInterno.removeAll();
                                     inicializarVista();
+                                    reiniciarRelojPartida();
+                                    temporizadorPartida.start();
                            }
                             else{
                                 vista.PanelInterno.removeAll();
                                 inicializarVista();
-                                segundos=0;
-                                minutos=0;
-                                horas=0;
+                                if(tipo==1){
+                                    segundos=0;
+                                    minutos=0;
+                                    horas=0;
+                                }
                                 reiniciarRelojPartida();
+                                temporizadorPartida.start();
                             }
                     } 
             }
