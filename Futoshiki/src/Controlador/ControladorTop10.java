@@ -11,8 +11,6 @@ import Vista.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.ComboBoxModel;
-import javax.swing.SpinnerListModel;
 
 public class ControladorTop10 {
     private MenuTop10 vistaTop;

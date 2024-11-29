@@ -449,10 +449,11 @@ public class Top10 implements Serializable {
      * @param minutos minutos hechos por el jugador
      * @param segundos segundos hechos por el jugador
      * @param nombre nombre del jugador
+     * @param dificultadJuego dificultad del top a agregar
      * @return booleano: true si el jugador fue agregado, false si no
      */
-    public static boolean agregarTop10(ArrayList<ArrayList<Top10>> top10, Configuracion configuracion, int horas, int minutos, int segundos, String nombre){
-        int dificultad = configuracion.getDificultad() - 1;
+    public static boolean agregarTop10(ArrayList<ArrayList<Top10>> top10, Configuracion configuracion, int horas, int minutos, int segundos, String nombre, int dificultadJuego){
+        int dificultad = dificultadJuego - 1;
         int cuadricula = configuracion.getTamañoCuadricula() - 3;
         Top10 top10AUsar = top10.get(dificultad).get(cuadricula);
         

@@ -1,28 +1,18 @@
 package Modelo;
 
-
-import java.util.ArrayList;
 import java.io.File;
 import java.io.Serializable;
-import static java.lang.Math.random;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-/**
- *
- */
+
 public class Juego implements Serializable{
  
     //atributos
@@ -30,7 +20,8 @@ public class Juego implements Serializable{
     private ArrayList<Partida> partidas;
     private Configuracion configuracion;
     private Partida partidaActual;
-    //constructor
+    
+    //metodos
     /**
      * El constructor del juego no recibe paramentros ya que sus atributos se definen de forma separada
      */
@@ -173,10 +164,10 @@ public class Juego implements Serializable{
                 if (nodo.getNodeType() == Node.ELEMENT_NODE) {
                     Element elemento = (Element)nodo;
                     String constanteTexto = elemento.getFirstChild().getNodeValue();
-                    String[] partes = constanteTexto.split(",");; 
-                    int constante =Integer.valueOf(partes[0]);
-                    int fila = Integer.valueOf(partes[1]);
-                    int columna =Integer.valueOf(partes[2]);
+                    String[] partes = constanteTexto.split(",");
+                    int constante =Integer.parseInt(partes[0]);
+                    int fila = Integer.parseInt(partes[1]);
+                    int columna =Integer.parseInt(partes[2]);
                     
                     partida.asignarConstante(fila, columna, constante);
                     partida.agregarConstante(constanteTexto);

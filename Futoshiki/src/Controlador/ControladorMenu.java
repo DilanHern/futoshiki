@@ -12,12 +12,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class ControladorMenu {
-    ArrayList<ArrayList<Top10>> top10Cargado;
     private MenuPrincipal vista;
     
-    private void setTop10Cargado(ArrayList<ArrayList<Top10>> top10Cargado){
-        this.top10Cargado = top10Cargado;
-    }
     
      /**
      * @param vista representa la vista del menu principal que el controlador va a manipular
@@ -30,7 +26,6 @@ public class ControladorMenu {
      */
     public ControladorMenu(MenuPrincipal vista, MenuConfiguracion vistaConfig, MenuTop10 vistaTop, Configuracion configuracionCargada, Juego juego, ArrayList<ArrayList<Top10>> top10Cargado){
         this.vista = vista;
-        this.top10Cargado = top10Cargado;
         //Agregar eventos listeners
 
         //Boton jugar, crea y muestra la vista para mostrarle la partida

@@ -8,14 +8,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ControladorAcercaDe {
-    
    private AcercaDe vista;
    
     /**
-     * @param vista representa la vista del menu principal que el controlador va a manipular
-     * @param vistaConfig representa la vista del menu de configuracion para mostrarlo u ocultarlo
-     * @param configuracionCargada es la configuracion actual del juego
-     * 
+     * Controlador entre la vista y la logica de Acerca de
+     * @param menu
+     * @param configuracionCargada
+     * @param juego
+     * @param vista 
      */
     public ControladorAcercaDe(MenuPrincipal menu, Configuracion configuracionCargada, Juego juego, AcercaDe vista){
     

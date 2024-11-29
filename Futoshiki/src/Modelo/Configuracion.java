@@ -251,15 +251,6 @@ public class Configuracion implements Serializable{
     }
 
     /**
-     * @param aInstancia la instancia a asignar
-     */
-    /*
-    public static void setInstancia(Configuracion aInstancia) {
-        instancia = aInstancia;
-    }
-    */
-    
-    /**
      * @return el tamañoCuadricula asignado
      */
     public int getTamañoCuadricula() {

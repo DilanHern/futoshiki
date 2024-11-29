@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Modelo;
 
 import java.io.Serializable;
@@ -19,10 +15,10 @@ public class JugadorTop implements Serializable {
     
     /**
      * Constructor del objeto JugadorTop
-     * @param nombre
-     * @param horas
-     * @param minutos
-     * @param segundos 
+     * @param nombre nombre del jugador
+     * @param horas horas del juego
+     * @param minutos minutos del juego
+     * @param segundos segundos del juego
      */
     public JugadorTop(String nombre, int horas, int minutos, int segundos){
         this.nombre = nombre;
@@ -62,6 +58,10 @@ public class JugadorTop implements Serializable {
         this.segundos = segundos;
     }
     
+    /**
+     * Nos da el tiempo del jugador den formato del string
+     * @return 
+     */
     public String getTiempo(){
         Integer horasI = horas;
         Integer minutosI = minutos;

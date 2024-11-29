@@ -10,15 +10,11 @@ import java.awt.event.ActionListener;
 import Modelo.*;
 import Vista.MenuConfiguracion;
 import Vista.MenuTop10;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -50,7 +46,7 @@ public class ControladorJugar implements Serializable {
     private List<String> jugadasEliminadas = new ArrayList<String>(); //Almancena las jugadas en caso de que se quiera rehacer y estas fueron borradas
     private List<String> jugadasRealizadas = new ArrayList<String>(); //Almancena las jugadas realizadas estas funcionan por si se borra algua
     private boolean borrador = false; //Sera true en caso de ser presionado, y este funciona para poder borrar una celda, por lo que se valida si esta en true
-    private int dificultad;
+    private int dificultad; //1 facil, 2 normal, 3 dificil
     //------------------TIMER------------------------
     private Timer reloj;
     private int horas=0; //controla las horas que han concurrido
@@ -438,7 +434,9 @@ public class ControladorJugar implements Serializable {
              }
         }
     }
-    
+    /**
+     * Borra todas las jugadas hechas en el juego
+     */
     private void borrarJuego(){
         //mientras hayan jugadas en la lista
         while (!jugadasRealizadas.isEmpty()){
@@ -535,14 +533,16 @@ public class ControladorJugar implements Serializable {
                             }else{
                                 boolean gane = juego.getPartidaActual().validarGane();
                                 if(gane){
-                                    if (Top10.agregarTop10(top10, configuracion,horasPartida,minutosPartida,segundosPartida, configuracion.getNombreJugador())){ //verifica si se puede agregar al top10
-                                        try{
-                                            Top10.guardarTop("futoshiki2024top10.txt", top10);
-                                        }
-                                        catch(IOException ex){
-                                            JOptionPane.showMessageDialog(f,"Hubo un error guardando el top10 ");
-                                        }
-                                    }    
+                                    if (!configuracion.getNombreJugador().equals("")){ //si el jugador no es anonimo
+                                        if (Top10.agregarTop10(top10, configuracion, horasPartida,minutosPartida,segundosPartida, configuracion.getNombreJugador(), dificultad)){ //verifica si se puede agregar al top10
+                                            try{
+                                                Top10.guardarTop("futoshiki2024top10.txt", top10);
+                                            }
+                                            catch(IOException ex){
+                                                JOptionPane.showMessageDialog(f,"Hubo un error guardando el top10 ");
+                                            }
+                                        } 
+                                    }
                                     JOptionPane.showMessageDialog(f,"Felicidades ha ganado la partida "); 
                                     //actualiza la partida actual para ponerla en true e indicar que ya finalizado
                                     juego.getPartidaActual().setHaFinalizado(true);
@@ -723,11 +723,20 @@ public class ControladorJugar implements Serializable {
     
     /**
      * Setter de controladorJugar
-     * @param vista
-     * @param juego
-     * @param vistaConf 
+     * @param juego juego actual
+     * @param configuracion configuracion actual
+     * @param jugadasEliminadas pila de jugadas eliminadas
+     * @param jugadasRealizadas pila de jugadas realizadas
+     * @param reloj timer del tiempo actual
+     * @param horas horas del temporizador
+     * @param minutos minutos del temporizador
+     * @param segundos segundos del temporizador
+     * @param tipo tipo de reloj usado
+     * @param horasPartida horas de la partida
+     * @param minutosPartida minutos de la partida
+     * @param segundosPartida segundos de la partida
      */
-    public void setControladorJugar(Juego juego, Configuracion configuracion, List<String> jugadasEliminadas, List<String> jugadasRealizadas, Timer reloj, int horas, int minutos, int segundos, int tipo){
+    public void setControladorJugar(Juego juego, Configuracion configuracion, List<String> jugadasEliminadas, List<String> jugadasRealizadas, Timer reloj, int horas, int minutos, int segundos, int tipo, int horasPartida, int minutosPartida, int segundosPartida){
         this.juego = juego;
         this.configuracion = configuracion;
         this.jugadasRealizadas = jugadasRealizadas;
@@ -737,6 +746,9 @@ public class ControladorJugar implements Serializable {
         this.minutos = minutos;
         this.segundos = segundos;
         this.tipo = tipo;
+        this.horasPartida = horasPartida;
+        this.minutosPartida = minutosPartida;
+        this.segundosPartida = segundosPartida;
     }
     
     /**
@@ -829,7 +841,7 @@ public class ControladorJugar implements Serializable {
                     return;
                 }
                 setControladorJugar(juegoCargado.getJuego(), juegoCargado.getConfiguracion(), juegoCargado.getJugadasEliminadas(), juegoCargado.getJugadasRealizadas(), juegoCargado.getReloj(), juegoCargado.getHoras(),
-                        juegoCargado.getMinutos(), juegoCargado.getSegundos(), juegoCargado.getTipo());
+                        juegoCargado.getMinutos(), juegoCargado.getSegundos(), juegoCargado.getTipo(), juegoCargado.getHorasPartida(), juegoCargado.getMinutosPartida(), juegoCargado.getSegundosPartida());
                 
                 if(configuracion.getMultinivel()){
                         vista.PanelInterno.removeAll();
@@ -858,7 +870,7 @@ public class ControladorJugar implements Serializable {
         this.vista.btnGuardarJuego.addActionListener(new ActionListener(){
          @Override
             public void actionPerformed(ActionEvent e){
-                JuegoGuardado juegoAGuardar = new JuegoGuardado(configuracion, juego, jugadasEliminadas, jugadasRealizadas, reloj, horas, minutos, segundos, tipo); //tambien guardar reloj/timer
+                JuegoGuardado juegoAGuardar = new JuegoGuardado(configuracion, juego, jugadasEliminadas, jugadasRealizadas, reloj, horas, minutos, segundos, tipo, horasPartida, minutosPartida, segundosPartida); //tambien guardar reloj/timer
                 try {
                     JuegoGuardado.guardarJuegoGuardado("futoshiki2024juegoactual.txt", juegoAGuardar);
                     JOptionPane.showMessageDialog(null, "La partida se guardo correctamente!");
