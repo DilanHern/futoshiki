@@ -134,7 +134,7 @@ public class ControladorJugar implements Serializable {
         }
         if(minutos==0){
             if(horas>0){
-                minutos=59;
+                minutos=60;
                 horas--;
             }
         }
@@ -555,8 +555,11 @@ public class ControladorJugar implements Serializable {
                                         jugadasRealizadas = new ArrayList<String>();
                                         jugadasEliminadas = new ArrayList<String>();
                                         inicializarVista();
+                                        temporizadorPartida.start();
                                     }
                                     else{
+                                        jugadasRealizadas = new ArrayList<String>();
+                                        jugadasEliminadas = new ArrayList<String>();
                                         //al ser un solo jugador sale de la ventana y vuele al menu
                                         salirPartida();
                                     }
