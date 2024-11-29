@@ -60,16 +60,16 @@ public class ControladorJugar implements Serializable {
     private Timer temporizadorPartida = new Timer(1000, new ActionListener() {
     @Override
     public void actionPerformed(ActionEvent e) {
-            //aumenta las variables que mideen el tiempo en la partida
-           segundosPartida++;
-            if(segundosPartida == 61){
-                segundosPartida=0;
-                minutosPartida++;
-            }
-            if(minutosPartida==60){
-                minutosPartida=0;
-                horasPartida++;
-            }
+        //aumenta las variables que mideen el tiempo en la partida
+       segundosPartida++;
+        if(segundosPartida == 59){
+            segundosPartida=0;
+            minutosPartida++;
+        }
+        if(minutosPartida==59){
+            minutosPartida=0;
+            horasPartida++;
+        }
         }
     });
     
@@ -125,13 +125,14 @@ public class ControladorJugar implements Serializable {
         if(segundos == 0){
             
             if(minutos>0){
-                segundos=60;
+                segundos=59;
                 minutos--;
             }
         }
         if(minutos==0){
             if(horas>0){
-                minutos=60;
+                minutos=59;
+                segundos = 59;
                 horas--;
             }
         }
@@ -185,7 +186,7 @@ public class ControladorJugar implements Serializable {
      */
     private void ActualizarCronometro(){
         segundos++;
-        if(segundos == 61){
+        if(segundos == 59){
             segundos=0;
             minutos++;
         }
@@ -800,7 +801,13 @@ public class ControladorJugar implements Serializable {
                                     minutos=0;
                                     horas=0;
                                 }
+                                if (tipo==2){
+                                    horas = configuracion.getHoras();
+                                    minutos = configuracion.getMinutos();
+                                    segundos = configuracion.getSegundos();
+                                }
                                 reiniciarRelojPartida();
+                                temporizadorPartida.restart();
                                 temporizadorPartida.start();
                             }
                     } 
